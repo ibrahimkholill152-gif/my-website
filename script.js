@@ -173,35 +173,58 @@ function updateSliderTrack() {
 }
 
 // 4. Gallery Modal Fullscreen
+/* ==========================================
+   GALERI PREMIUM FULL JS
+========================================== */
+
 function openGalleryModal(index) {
     currentGalleryIndex = index;
+
+    const thumbsHTML = moments.map((img, i) => `
+        <img src="${img}" 
+             class="gallery-thumb ${i === index ? 'active' : ''}"
+             onclick="jumpGallery(${i})">
+    `).join('');
+
     const modal = document.createElement('div');
     modal.className = 'gallery-modal';
+
     modal.innerHTML = `
-    <div class="gallery-modal-content">
-        <button class="gallery-modal-close" onclick="closeGalleryModal()">
-            <i class="fas fa-times"></i>
-        </button>
+        <div class="gallery-modal-content">
 
-        <button class="gallery-modal-nav gallery-modal-prev" onclick="prevGallery()">
-            <i class="fas fa-chevron-left"></i>
-        </button>
+            <button class="gallery-modal-close" onclick="closeGalleryModal()">
+                <i class="fas fa-times"></i>
+            </button>
 
-        <button class="gallery-modal-nav gallery-modal-next" onclick="nextGallery()">
-            <i class="fas fa-chevron-right"></i>
-        </button>
+            <button class="gallery-modal-nav gallery-modal-prev" onclick="prevGallery()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
 
-        <img src="${moments[currentGalleryIndex]}" alt="Momen ${currentGalleryIndex + 1}">
-    </div>
-`;
+            <button class="gallery-modal-nav gallery-modal-next" onclick="nextGallery()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <div class="gallery-modal-counter">
+                ${index + 1} / ${moments.length}
+            </div>
+
+            <img id="galleryMainImage" src="${moments[index]}">
+
+            <div class="gallery-thumbs">
+                ${thumbsHTML}
+            </div>
+
+        </div>
+    `;
+
     document.body.appendChild(modal);
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', galleryKeyNav, { once: true });
+
+    document.addEventListener('keydown', galleryKeyNav);
 }
 
 function closeGalleryModal() {
     document.querySelector('.gallery-modal')?.remove();
+    document.removeEventListener('keydown', galleryKeyNav);
 }
 
 function prevGallery() {
@@ -216,22 +239,28 @@ function nextGallery() {
     updateGalleryModal();
 }
 
+function jumpGallery(index) {
+    currentGalleryIndex = index;
+    updateGalleryModal();
+}
+
 function updateGalleryModal() {
-    const modalImg = document.querySelector('.gallery-modal img');
+    const img = document.getElementById('galleryMainImage');
     const counter = document.querySelector('.gallery-modal-counter');
-    modalImg.src = moments[currentGalleryIndex];
-    counter.textContent = `${currentGalleryIndex + 1} / ${moments.length}`;
+
+    img.src = moments[currentGalleryIndex];
+    counter.innerText = `${currentGalleryIndex + 1} / ${moments.length}`;
+
+    document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === currentGalleryIndex);
+    });
 }
 
 function galleryKeyNav(e) {
-    const modal = document.querySelector('.gallery-modal');
-    if (!modal) return;
-    
     if (e.key === 'Escape') closeGalleryModal();
     if (e.key === 'ArrowLeft') prevGallery();
     if (e.key === 'ArrowRight') nextGallery();
 }
-
 // ============================================
 // INIT - Load Semua
 // ============================================
