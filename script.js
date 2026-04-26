@@ -88,8 +88,11 @@ const moments = [
 ];
 
 let currentSlide = 0;
+let currentGalleryIndex = 0;
 
-// Load Siswa
+// ============================================
+// SISWA FUNCTIONS (Tetep sama)
+// ============================================
 function loadStudents() {
     const grid = document.getElementById('siswaGrid');
     grid.innerHTML = '';
@@ -97,7 +100,7 @@ function loadStudents() {
     students.forEach(student => {
         const card = document.createElement('div');
         card.className = 'siswa-card';
-        card.onclick = () => openModal(student);
+        card.onclick = () => openSiswaModal(student);
         card.innerHTML = `
             <img src="${student.photo}" alt="${student.name}" class="siswa-photo">
             <h3 class="siswa-name">${student.name}</h3>
@@ -106,56 +109,7 @@ function loadStudents() {
     });
 }
 
-// Load Momen Slider - MANUAL ONLY
-function loadSlider() {
-    const slider = document.getElementById('momenSlider');
-    const dotsContainer = document.getElementById('sliderDots');
-    
-    slider.innerHTML = '';
-    dotsContainer.innerHTML = '';
-    
-    moments.forEach((moment, index) => {
-        // Slide
-        const slide = document.createElement('div');
-        slide.className = `slide ${index === 0 ? 'active' : ''}`;
-        slide.innerHTML = `
-            <img src="${moment}" alt="Momen ${index + 1}">
-            <div class="slide-caption">Momen ${index + 1} / ${moments.length}</div>
-        `;
-        slider.appendChild(slide);
-        
-        // Dot
-        const dot = document.createElement('div');
-        dot.className = `dot ${index === 0 ? 'active' : ''}`;
-        dot.onclick = () => goToSlide(index);
-        dotsContainer.appendChild(dot);
-    });
-}
-
-// Slider Controls
-function changeSlide(direction) {
-    currentSlide += direction;
-    if (currentSlide >= moments.length) currentSlide = 0;
-    if (currentSlide < 0) currentSlide = moments.length - 1;
-    updateSlider();
-}
-
-function goToSlide(index) {
-    currentSlide = index;
-    updateSlider();
-}
-
-function updateSlider() {
-    document.querySelectorAll('.slide').forEach((slide, i) => {
-        slide.classList.toggle('active', i === currentSlide);
-    });
-    document.querySelectorAll('.dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-    });
-}
-
-// Modal Siswa (sudah ada)
-function openModal(student) {
+function openSiswaModal(student) {
     const modal = document.createElement('div');
     modal.className = 'modal';
     modal.innerHTML = `
@@ -168,71 +122,28 @@ function openModal(student) {
     document.body.appendChild(modal);
 }
 
-// 🔥 MODAL MOMEN BARU - Klik foto momen
-function openMomenModal(momentSrc, index) {
-    const modal = document.createElement('div');
-    modal.className = 'modal momen-modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <span class="close" onclick="this.closest('.modal').remove()">&times;</span>
-            <img src="${momentSrc}" alt="Momen ${index + 1}">
-            <div class="momen-modal-info">
-                <h2>Momen ${index + 1} / ${moments.length}</h2>
-                <div class="nav-modal">
-                    <button onclick="prevMomenModal()" class="nav-modal-btn">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button onclick="nextMomenModal()" class="nav-modal-btn">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
+// ============================================
+// MOMEN 2x5 GRID + SLIDER + MODAL
+// ============================================
 
-// Nav Modal Momen
-let currentMomenModal = 0;
-function prevMomenModal() {
-    currentMomenModal--;
-    if (currentMomenModal < 0) currentMomenModal = moments.length - 1;
-    updateMomenModal();
-}
-
-function nextMomenModal() {
-    currentMomenModal++;
-    if (currentMomenModal >= moments.length) currentMomenModal = 0;
-    updateMomenModal();
-}
-
-function updateMomenModal() {
-    const modalImg = document.querySelector('.momen-modal img');
-    const modalTitle = document.querySelector('.momen-modal h2');
-    modalImg.src = moments[currentMomenModal];
-    modalTitle.textContent = `Momen ${currentMomenModal + 1} / ${moments.length}`;
-}
-
-// INIT
-document.addEventListener('DOMContentLoaded', () => {
-    loadStudents();
-    loadSlider();
-});
-
-// Load Momen Grid 2x5
+// 1. Load 2x5 Grid (10 foto pertama)
 function loadMomenGrid() {
     const grid = document.getElementById('momenGrid');
     grid.innerHTML = '';
     
-    moments.slice(0, 10).forEach((moment, index) => { // 10 foto pertama
+    moments.slice(0, 10).forEach((moment, index) => {
         const photo = document.createElement('div');
         photo.className = 'momen-photo-container';
-        photo.innerHTML = `<img src="${moment}" alt="Momen ${index + 1}" class="momen-photo" onclick="openGalleryModal(${index})">`;
+        photo.innerHTML = `
+            <img src="${moment}" alt="Momen ${index + 1}" 
+                 class="momen-photo" 
+                 onclick="openGalleryModal(${index})">
+        `;
         grid.appendChild(photo);
     });
 }
 
-// Load Thumbnail Slider
+// 2. Load Thumbnail Slider (70 foto)
 function loadSlider() {
     const track = document.getElementById('momenSlider');
     track.innerHTML = '';
@@ -243,6 +154,8 @@ function loadSlider() {
         thumb.src = moment;
         thumb.alt = `Momen ${index + 1}`;
         thumb.onclick = () => {
+            currentSlide = index;
+            updateSliderTrack();
             openGalleryModal(index);
         };
         track.appendChild(thumb);
@@ -251,22 +164,26 @@ function loadSlider() {
     updateSliderTrack();
 }
 
-// Update slider position
+// 3. Update slider position
 function updateSliderTrack() {
     const track = document.getElementById('momenSlider');
-    const thumbWidth = 150 + 16; // width + gap
+    const thumbWidth = 166; // 150px + 16px gap
     track.style.transform = `translateX(-${currentSlide * thumbWidth}px)`;
+    
+    // Update active thumb
+    document.querySelectorAll('.slider-thumb').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === currentSlide);
+    });
 }
 
-// Gallery Modal
-let currentGalleryIndex = 0;
+// 4. Gallery Modal Fullscreen
 function openGalleryModal(index) {
     currentGalleryIndex = index;
     const modal = document.createElement('div');
     modal.className = 'gallery-modal';
     modal.innerHTML = `
         <div class="gallery-modal-content">
-            <button class="gallery-modal-close" onclick="this.closest('.gallery-modal').remove()">
+            <button class="gallery-modal-close" onclick="closeGalleryModal()">
                 <i class="fas fa-times"></i>
             </button>
             <button class="gallery-modal-prev" onclick="prevGallery()">
@@ -275,7 +192,7 @@ function openGalleryModal(index) {
             <button class="gallery-modal-next" onclick="nextGallery()">
                 <i class="fas fa-chevron-right"></i>
             </button>
-            <img src="${moments[currentGalleryIndex]}" alt="Momen">
+            <img src="${moments[currentGalleryIndex]}" alt="Momen ${currentGalleryIndex + 1}">
             <div class="gallery-modal-counter">
                 ${currentGalleryIndex + 1} / ${moments.length}
             </div>
@@ -283,8 +200,12 @@ function openGalleryModal(index) {
     `;
     document.body.appendChild(modal);
     
-    // Keyboard
-    document.addEventListener('keydown', galleryKeyNav);
+    // Keyboard navigation
+    document.addEventListener('keydown', galleryKeyNav, { once: true });
+}
+
+function closeGalleryModal() {
+    document.querySelector('.gallery-modal')?.remove();
 }
 
 function prevGallery() {
@@ -307,10 +228,19 @@ function updateGalleryModal() {
 }
 
 function galleryKeyNav(e) {
-    if (!document.querySelector('.gallery-modal')) return;
-    if (e.key === 'Escape') document.querySelector('.gallery-modal').remove();
+    const modal = document.querySelector('.gallery-modal');
+    if (!modal) return;
+    
+    if (e.key === 'Escape') closeGalleryModal();
     if (e.key === 'ArrowLeft') prevGallery();
     if (e.key === 'ArrowRight') nextGallery();
 }
 
-// Siswa functions sama seperti sebelumnya...
+// ============================================
+// INIT - Load Semua
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    loadStudents();    // Siswa grid
+    loadMomenGrid();   // 2x5 momen grid
+    loadSlider();      // Thumbnail slider
+});
