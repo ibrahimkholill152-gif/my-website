@@ -244,6 +244,3 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMomenGrid();   // 2x5 momen grid
     loadSlider();      // Thumbnail slider
 });
-
-
-});
