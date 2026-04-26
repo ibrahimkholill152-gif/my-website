@@ -149,21 +149,17 @@ function loadSlider() {
     track.innerHTML = '';
 
     moments.forEach((moment, index) => {
-        const thumb = document.createElement('img');
-        thumb.className = 'slider-thumb';
-        thumb.src = moment;
-        thumb.alt = `Momen ${index + 1}`;
+        const img = document.createElement('img');
+        img.src = moment;
+        img.className = 'slider-thumb';
 
-        thumb.onclick = () => {
+        img.onclick = () => {
             openGalleryModal(index);
         };
 
-        track.appendChild(thumb);
+        track.appendChild(img);
     });
 }
-    
-}
-
 // 3. Update slider position
 function updateSliderTrack() {
     const track = document.getElementById('momenSlider');
