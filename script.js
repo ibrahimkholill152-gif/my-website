@@ -1,18 +1,37 @@
 // Data Siswa (30 orang)
 const students = [
-    { name: "Ahmad Rizky", photo: "https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=Ahmad" },
-    { name: "Siti Nurhaliza", photo: "https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Siti" },
-    { name: "Budi Santoso", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Ahmad Fariski", photo: "https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=Ahmad" },
+    { name: "Alya Putri Sartika", photo: "https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Siti" },
+    { name: "Anisa Hafizah Misbah", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Asrori Ibnu Muzaki", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Aura Kamila", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Carissa Alzena Yuniar", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Effeline Avriliandoko", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Firyal Ariqah", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Halilah Azka Rauf", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Ibrahim Kholil Alkatsiri", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Jahrotu Syita", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Livia Nur Hafizah", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Luqman Ahsan Yasir", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "M Bagus Surya Darma", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Muhamad Zidane", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "M Azhari Anhar", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "M Fadel Arif Abdul Malik", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "M Irfandi Yusuf", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "M Rizki Taqiyudin Kamil", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Nadhira Salma Apriyani", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Nuril Shabrina", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Putra Ahmad Fauzi", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Radhitya Raffa Janafi", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Raisha Putri Rahmadani", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Rizky Putra Anugrah", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Safwah Rinjani", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Shava Azzahra U.T", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Syeima Ibrahim Lubis", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Wisnu Ardhi Winata", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
+    { name: "Zahratus Dzihni Sayidah", photo: "https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Budi" },
     // Tambah 27 lagi atau generate random
 ];
-
-// Generate 30 siswa
-for(let i = students.length; i < 30; i++) {
-    students.push({
-        name: `Siswa ${i+1}`,
-        photo: `https://via.placeholder.com/400x300/${Math.floor(Math.random()*16777215).toString(16)}/FFFFFF?text=Siswa+${i+1}`
-    });
-}
 
 // Data Momen (foto kelompok)
 const moments = [
