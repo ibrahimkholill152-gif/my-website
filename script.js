@@ -97,7 +97,7 @@ function loadStudents() {
     const grid = document.getElementById('siswaGrid');
     grid.innerHTML = '';
     
-    students.forEach(student => {
+    students.forEach((student, index) => {
         const card = document.createElement('div');
         card.className = 'siswa-card';
         card.onclick = () => openSiswaModal(student);
