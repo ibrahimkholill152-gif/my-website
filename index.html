@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelas X-16 - 2025/2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Hero Section dengan Background Foto Kelas -->
+    <section class="hero">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1 class="hero-title">Kelas X-16</h1>
+                <p class="hero-subtitle">Tahun Ajaran 2025/2026</p>
+                <div class="hero-stats">
+                    <div><span>30</span> Siswa</div>
+                    <div><span>1</span> Wali Kelas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guru/Wali Kelas Section -->
+    <section class="guru-section">
+        <div class="container">
+            <h2 class="section-title">👨‍🏫 Wali Kelas</h2>
+            <div class="guru-card">
+                <div class="guru-photo">
+                    <img src="https://via.placeholder.com/400x400/667eea/FFFFFF?text=Guru" alt="Wali Kelas">
+                </div>
+                <div class="guru-info">
+                    <h3>Bapak <strong>Abdul Wahab Amirullah S.Pd</strong></h3>
+                    <p>Mata Pelajaran: Bahasa Indonesia </p>
+                    <div class="guru-motto">
+                        "Belajar adalah kunci sukses masa depan!"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Siswa Section -->
+    <section class="siswa-section">
+        <div class="container">
+            <h2 class="section-title">👥 Anggota Kelas</h2>
+            <div class="siswa-grid" id="siswaGrid">
+                <!-- Siswa loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Momen Section dengan Slider -->
+    <section class="momen-section">
+        <div class="container">
+            <h2 class="section-title">📸 Moment</h2>
+            <div class="slider-container">
+                <div class="slider" id="momenSlider">
+                    <!-- Slides loaded via JS -->
+                </div>
+                <div class="slider-nav">
+                    <button class="nav-btn prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
