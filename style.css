@@ -102,93 +102,158 @@ body {
 }
 /* Siswa */
 /* ANGGOTA KELAS - BACKGROUND FOTO FIXED */
-.siswa-section {
+/* =====================================
+   ANGGOTA KELAS FULL PREMIUM
+   copy paste ganti css siswa lama
+===================================== */
+
+.siswa-section{
     padding: 8rem 0;
-    background: 
-        linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-        url('./images/momen6.jpeg') center/cover fixed no-repeat;
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+    background:
+    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+    url('./images/momen6.jpeg') center/cover fixed no-repeat;
 }
 
-.siswa-container {
-    position: relative;
-    z-index: 2;
+.siswa-container{
     width: 100%;
+    max-width: 1450px;
+    margin: auto;
+    padding: 0 1.5rem;
 }
 
-.siswa-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
+.siswa-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1.5rem;
 }
 
-/* Siswa Card - Glass Effect */
-/* ANGGOTA KELAS PREMIUM */
+/* CARD */
+.siswa-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:28px;
+    cursor:pointer;
 
-.siswa-card {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(18px);
-    border-radius: 28px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    transition: 0.35s ease;
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 12px 30px rgba(0,0,0,.25);
+    background:rgba(255,255,255,.10);
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:0 12px 30px rgba(0,0,0,.28);
+
+    transition:.35s ease;
 }
 
-.siswa-card:hover {
-    transform: translateY(-12px) scale(1.03);
-    box-shadow: 0 20px 45px rgba(0,0,0,.35);
+.siswa-card:hover{
+    transform:translateY(-12px) scale(1.03);
+    box-shadow:0 22px 45px rgba(0,0,0,.38);
 }
 
-.siswa-photo {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    transition: 0.4s ease;
+/* FOTO */
+.siswa-photo{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    transition:.45s ease;
 }
 
-.siswa-card:hover .siswa-photo {
-    transform: scale(1.08);
+.siswa-card:hover .siswa-photo{
+    transform:scale(1.08);
 }
 
-.siswa-name {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 14px;
-    text-align: center;
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
-    background: linear-gradient(to top, rgba(0,0,0,.8), transparent);
+/* OVERLAY */
+.siswa-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,
+    rgba(0,0,0,.82) 0%,
+    rgba(0,0,0,.10) 45%,
+    transparent 70%);
+    z-index:1;
 }
 
-/* nomor urut */
-.siswa-card::after {
-    content: attr(data-no);
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #667eea;
-    color: white;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* NAMA */
+.siswa-name{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    padding:1rem;
+    color:#fff;
+    font-size:1rem;
+    font-weight:700;
+    text-align:center;
+    z-index:2;
+    letter-spacing:.3px;
 }
 
+/* NOMOR */
+.siswa-card::after{
+    content:attr(data-no);
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:linear-gradient(45deg,#667eea,#764ba2);
+    color:#fff;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:3;
+    box-shadow:0 8px 18px rgba(0,0,0,.25);
+}
+
+/* SHINE EFFECT */
+.siswa-card span{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(255,255,255,.18) 50%,
+        transparent 80%
+    );
+    transform:translateX(-130%);
+    transition:.6s;
+    z-index:2;
+}
+
+.siswa-card:hover span{
+    transform:translateX(130%);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.siswa-grid{
+grid-template-columns:repeat(2,1fr);
+gap:1rem;
+}
+
+.siswa-name{
+font-size:.88rem;
+padding:.8rem;
+}
+
+.siswa-card::after{
+width:30px;
+height:30px;
+font-size:.8rem;
+}
+
+}
+
+@media(max-width:480px){
+
+.siswa-grid{
+grid-template-columns:1fr 1fr;
+}
+
+}
 /* Momen Slider - MANUAL ONLY */
 .momen-section { padding: 8rem 0; background: #f8f9ff; }
 .slider-container { max-width: 1000px; margin: 0 auto; position: relative; }
