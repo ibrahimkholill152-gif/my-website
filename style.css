@@ -1,4 +1,3 @@
-/* ===== GLOBAL ===== */
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +9,6 @@ body {
     line-height: 1.6;
     color: #333;
     overflow-x: hidden;
-    scroll-behavior: smooth;
 }
 
 .container {
@@ -19,12 +17,11 @@ body {
     padding: 0 2rem;
 }
 
-/* ===== HERO BACKGROUND ===== */
+/* HERO SECTION */
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                url('./images/WhatsApp_Image_2026-04-26_at_9.45.03_AM_upscaled.jpeg') 
-    center/cover no-repeat;
+                url('https://via.placeholder.com/1920x1080/667eea/FFFFFF?text=Foto+Sekelas') center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,10 +31,9 @@ body {
 
 .hero-overlay {
     background: rgba(0,0,0,0.4);
-    padding: 3rem 4rem;
+    padding: 3rem;
     border-radius: 30px;
     backdrop-filter: blur(10px);
-    max-width: 90%;
 }
 
 .hero-title {
@@ -76,7 +72,7 @@ body {
     display: block;
 }
 
-/* ===== SECTION TITLES ===== */
+/* SECTION COMMON */
 .section-title {
     font-size: 3rem;
     text-align: center;
@@ -87,7 +83,7 @@ body {
     font-weight: 700;
 }
 
-/* ===== GURU/WALI KELAS ===== */
+/* GURU SECTION */
 .guru-section {
     padding: 8rem 0;
     background: #f8f9ff;
@@ -133,7 +129,7 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* ===== SISWA GRID ===== */
+/* SISWA SECTION */
 .siswa-section {
     padding: 8rem 0;
 }
@@ -173,10 +169,10 @@ body {
     font-size: 1.3rem;
     font-weight: 700;
     color: #333;
+    margin-bottom: 0.5rem;
 }
 
-/* ===== MOMEN SLIDER 70+ FOTO ===== */
-/* ===== MOMEN SLIDER ADVANCE (Tambah ini di style.css) ===== */
+/* MOMEN SECTION */
 .momen-section {
     padding: 8rem 0;
     background: #f8f9ff;
@@ -192,21 +188,15 @@ body {
     overflow: hidden;
     border-radius: 25px;
     box-shadow: 0 30px 80px rgba(0,0,0,0.2);
-    position: relative;
 }
 
 .slide {
     display: none;
     width: 100%;
-    opacity: 0;
-    transform: scale(0.95);
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .slide.active {
     display: block;
-    opacity: 1;
-    transform: scale(1);
 }
 
 .slide img {
@@ -215,19 +205,6 @@ body {
     object-fit: cover;
 }
 
-.slide-caption {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-}
-
-/* Navigation Buttons */
 .slider-nav {
     display: flex;
     justify-content: center;
@@ -245,124 +222,52 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(102,126,234,0.3);
 }
 
 .nav-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 15px 35px rgba(102,126,234,0.5);
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(102,126,234,0.4);
 }
 
-/* Dots Indicators */
 .slider-dots {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
     margin-top: 2rem;
-    flex-wrap: wrap;
-    max-width: 400px;
 }
 
 .dot {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.5);
+    background: #ddd;
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 2px solid rgba(255,255,255,0.3);
 }
 
 .dot.active {
     background: #667eea;
-    transform: scale(1.4);
-    box-shadow: 0 0 10px rgba(102,126,234,0.6);
+    transform: scale(1.3);
 }
 
-.dot:hover {
-    background: rgba(102,126,234,0.8);
-    transform: scale(1.2);
-}
-
-/* Progress Bar */
-
-/* Mobile Swipe */
-.slider-container {
-    touch-action: pan-y;
-}
-
+/* RESPONSIVE */
 @media (max-width: 768px) {
-    .slide img { height: 400px; }
-    .slider-dots { gap: 0.4rem; max-width: 300px; }
-    .dot { width: 12px; height: 12px; }
-}
-
-/* ===== MODAL ZOOM ===== */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    text-align: center;
-    max-width: 90%;
-    max-height: 90%;
-}
-
-.modal-content img {
-    max-width: 100%;
-    max-height: 70vh;
-    border-radius: 10px;
-}
-
-.modal-content h2 {
-    color: white;
-    margin-top: 1rem;
-    font-size: 2rem;
-}
-
-.close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 40px;
-    cursor: pointer;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .hero-stats { gap: 1.5rem; }
-    .hero-stats div { padding: 0.8rem 1.5rem; }
-    
     .guru-card {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2rem;
     }
     
-    .guru-photo img { height: 300px; }
-    
     .siswa-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1.5rem;
     }
     
-    .section-title { font-size: 2rem; }
+    .hero-stats {
+        gap: 1.5rem;
+    }
     
-    .slider-dots { gap: 0.3rem; }
-    .dot { width: 12px; height: 12px; }
-}
-
-@media (max-width: 480px) {
-    .container { padding: 0 1rem; }
-    .hero-overlay { padding: 2rem; }
+    .section-title {
+        font-size: 2rem;
+    }
 }
