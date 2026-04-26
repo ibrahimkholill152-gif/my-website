@@ -178,22 +178,22 @@ function openGalleryModal(index) {
     const modal = document.createElement('div');
     modal.className = 'gallery-modal';
     modal.innerHTML = `
-        <div class="gallery-modal-content">
-            <button class="gallery-modal-close" onclick="closeGalleryModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            <button class="gallery-modal-prev" onclick="prevGallery()">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="gallery-modal-next" onclick="nextGallery()">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <img src="${moments[currentGalleryIndex]}" alt="Momen ${currentGalleryIndex + 1}">
-            <div class="gallery-modal-counter">
-                ${currentGalleryIndex + 1} / ${moments.length}
-            </div>
-        </div>
-    `;
+    <div class="gallery-modal-content">
+        <button class="gallery-modal-close" onclick="closeGalleryModal()">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <button class="gallery-modal-nav gallery-modal-prev" onclick="prevGallery()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <button class="gallery-modal-nav gallery-modal-next" onclick="nextGallery()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <img src="${moments[currentGalleryIndex]}" alt="Momen ${currentGalleryIndex + 1}">
+    </div>
+`;
     document.body.appendChild(modal);
     
     // Keyboard navigation
