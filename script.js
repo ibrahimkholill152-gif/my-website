@@ -93,22 +93,31 @@ let currentGalleryIndex = 0;
 // ============================================
 // SISWA FUNCTIONS (Tetep sama)
 // ============================================
+/* =====================================
+   GANTI FUNCTION loadStudents()
+===================================== */
+
 function loadStudents() {
     const grid = document.getElementById('siswaGrid');
     grid.innerHTML = '';
-    
+
     students.forEach((student, index) => {
         const card = document.createElement('div');
-        card.setAttribute("data-no", index + 1);
+
+        card.className = 'siswa-card';
+        card.setAttribute('data-no', index + 1);
+
         card.onclick = () => openSiswaModal(student);
+
         card.innerHTML = `
             <img src="${student.photo}" alt="${student.name}" class="siswa-photo">
+            <span></span>
             <h3 class="siswa-name">${student.name}</h3>
         `;
+
         grid.appendChild(card);
     });
 }
-
 function openSiswaModal(student) {
     const modal = document.createElement('div');
     modal.className = 'modal';
