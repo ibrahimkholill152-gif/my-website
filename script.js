@@ -89,26 +89,43 @@ const moments = [
 
 let currentSlide = 0;
 
+// Load Siswa
+function loadStudents() {
+    const grid = document.getElementById('siswaGrid');
+    grid.innerHTML = '';
+    
+    students.forEach((student, index) => {
+        const card = document.createElement('div');
+        card.className = 'siswa-card';
+        card.onclick = () => openModal(student);
+        
+        card.innerHTML = `
+            <img src="${student.photo}" alt="${student.name}" class="siswa-photo">
+            <div class="siswa-info">
+                <h3 class="siswa-name">${student.name}</h3>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// Load Slider Momen
 function loadSlider() {
     const slider = document.getElementById('momenSlider');
     const dotsContainer = document.getElementById('sliderDots');
     
+    // Clear existing
     slider.innerHTML = '';
     dotsContainer.innerHTML = '';
     
     moments.forEach((moment, index) => {
-        // Slide dengan caption
+        // Add slide
         const slide = document.createElement('div');
         slide.className = `slide ${index === 0 ? 'active' : ''}`;
-        slide.innerHTML = `
-            <img src="${moment}" alt="Momen ${index + 1}">
-            <div class="slide-caption">
-                Momen ${index + 1} / ${moments.length}
-            </div>
-        `;
+        slide.innerHTML = `<img src="${moment}" alt="Momen ${index + 1}">`;
         slider.appendChild(slide);
         
-        // Dot indicator
+        // Add dot
         const dot = document.createElement('div');
         dot.className = `dot ${index === 0 ? 'active' : ''}`;
         dot.onclick = () => goToSlide(index);
@@ -116,6 +133,7 @@ function loadSlider() {
     });
 }
 
+// Slider Functions
 function changeSlide(direction) {
     currentSlide += direction;
     if (currentSlide >= moments.length) currentSlide = 0;
@@ -129,25 +147,34 @@ function goToSlide(index) {
 }
 
 function updateSlider() {
-    // Update active slide
     document.querySelectorAll('.slide').forEach((slide, i) => {
         slide.classList.toggle('active', i === currentSlide);
     });
     
-    // Update active dot
     document.querySelectorAll('.dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === currentSlide);
     });
-    
-    // Update progress manual (kosongkan)
-    const progress = document.getElementById('progressFill');
-    if (progress) progress.style.width = '0%';
 }
 
-// Load saat halaman dimuat
-document.addEventListener('DOMContentLoaded', () => {
-    loadSlider();
-});
+// Modal Siswa
+function openModal(student) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close" onclick="this.closest('.modal').remove()">&times;</span>
+            <img src="${student.photo}" alt="${student.name}">
+            <h2>${student.name}</h2>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Auto slide
+setInterval(() => changeSlide(1), 5000);
+
 // Init
-document.addEventListener('DOMContentLoaded', loadSlider);
+document.addEventListener('DOMContentLoaded', () => {
+    loadStudents();
+    loadSlider();
 });
