@@ -28,7 +28,7 @@ const students = [
     { name: "Safwah Rinjani", photo: "./images/F.JPG" },
     { name: "Shava Azzahra U.T", photo: "./images/Shava.JPG" },
     { name: "Syeima Ibrahim Lubis", photo: "./images/Syeima.JPG" },
-    { name: "Wisnu Ardhi Winata", photo: "./images/Fariski.JPG" },
+    { name: "Wisnu Ardhi Winata", photo: "./images/Wisnu.JPG" },
     { name: "Zahratus Dzihni Sayidah", photo: "./images/Dzihni.JPG" },
     // Tambah 27 lagi atau generate random
 ];
