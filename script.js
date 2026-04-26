@@ -154,7 +154,7 @@ function updateSlider() {
     });
 }
 
-// Modal Siswa
+// Modal Siswa (sudah ada)
 function openModal(student) {
     const modal = document.createElement('div');
     modal.className = 'modal';
@@ -166,6 +166,51 @@ function openModal(student) {
         </div>
     `;
     document.body.appendChild(modal);
+}
+
+// 🔥 MODAL MOMEN BARU - Klik foto momen
+function openMomenModal(momentSrc, index) {
+    const modal = document.createElement('div');
+    modal.className = 'modal momen-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close" onclick="this.closest('.modal').remove()">&times;</span>
+            <img src="${momentSrc}" alt="Momen ${index + 1}">
+            <div class="momen-modal-info">
+                <h2>Momen ${index + 1} / ${moments.length}</h2>
+                <div class="nav-modal">
+                    <button onclick="prevMomenModal()" class="nav-modal-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button onclick="nextMomenModal()" class="nav-modal-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Nav Modal Momen
+let currentMomenModal = 0;
+function prevMomenModal() {
+    currentMomenModal--;
+    if (currentMomenModal < 0) currentMomenModal = moments.length - 1;
+    updateMomenModal();
+}
+
+function nextMomenModal() {
+    currentMomenModal++;
+    if (currentMomenModal >= moments.length) currentMomenModal = 0;
+    updateMomenModal();
+}
+
+function updateMomenModal() {
+    const modalImg = document.querySelector('.momen-modal img');
+    const modalTitle = document.querySelector('.momen-modal h2');
+    modalImg.src = moments[currentMomenModal];
+    modalTitle.textContent = `Momen ${currentMomenModal + 1} / ${moments.length}`;
 }
 
 // INIT
