@@ -161,7 +161,6 @@ function loadSlider() {
         track.appendChild(thumb);
     });
     
-    updateSliderTrack();
 }
 
 // 3. Update slider position
