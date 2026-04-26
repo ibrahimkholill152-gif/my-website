@@ -71,7 +71,7 @@ body {
 }
 
 .guru-card {
-    background: rgba(128,128,128, 0.95);
+    background: rgba(173, 216, 230, 0.95);
     backdrop-filter: blur(25px);
     border-radius: 35px;
     padding: 4rem;
