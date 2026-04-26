@@ -218,3 +218,99 @@ document.addEventListener('DOMContentLoaded', () => {
     loadStudents();
     loadSlider();
 });
+
+// Load Momen Grid 2x5
+function loadMomenGrid() {
+    const grid = document.getElementById('momenGrid');
+    grid.innerHTML = '';
+    
+    moments.slice(0, 10).forEach((moment, index) => { // 10 foto pertama
+        const photo = document.createElement('div');
+        photo.className = 'momen-photo-container';
+        photo.innerHTML = `<img src="${moment}" alt="Momen ${index + 1}" class="momen-photo" onclick="openGalleryModal(${index})">`;
+        grid.appendChild(photo);
+    });
+}
+
+// Load Thumbnail Slider
+function loadSlider() {
+    const track = document.getElementById('momenSlider');
+    track.innerHTML = '';
+    
+    moments.forEach((moment, index) => {
+        const thumb = document.createElement('img');
+        thumb.className = `slider-thumb ${index === 0 ? 'active' : ''}`;
+        thumb.src = moment;
+        thumb.alt = `Momen ${index + 1}`;
+        thumb.onclick = () => {
+            openGalleryModal(index);
+        };
+        track.appendChild(thumb);
+    });
+    
+    updateSliderTrack();
+}
+
+// Update slider position
+function updateSliderTrack() {
+    const track = document.getElementById('momenSlider');
+    const thumbWidth = 150 + 16; // width + gap
+    track.style.transform = `translateX(-${currentSlide * thumbWidth}px)`;
+}
+
+// Gallery Modal
+let currentGalleryIndex = 0;
+function openGalleryModal(index) {
+    currentGalleryIndex = index;
+    const modal = document.createElement('div');
+    modal.className = 'gallery-modal';
+    modal.innerHTML = `
+        <div class="gallery-modal-content">
+            <button class="gallery-modal-close" onclick="this.closest('.gallery-modal').remove()">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="gallery-modal-prev" onclick="prevGallery()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="gallery-modal-next" onclick="nextGallery()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <img src="${moments[currentGalleryIndex]}" alt="Momen">
+            <div class="gallery-modal-counter">
+                ${currentGalleryIndex + 1} / ${moments.length}
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    // Keyboard
+    document.addEventListener('keydown', galleryKeyNav);
+}
+
+function prevGallery() {
+    currentGalleryIndex--;
+    if (currentGalleryIndex < 0) currentGalleryIndex = moments.length - 1;
+    updateGalleryModal();
+}
+
+function nextGallery() {
+    currentGalleryIndex++;
+    if (currentGalleryIndex >= moments.length) currentGalleryIndex = 0;
+    updateGalleryModal();
+}
+
+function updateGalleryModal() {
+    const modalImg = document.querySelector('.gallery-modal img');
+    const counter = document.querySelector('.gallery-modal-counter');
+    modalImg.src = moments[currentGalleryIndex];
+    counter.textContent = `${currentGalleryIndex + 1} / ${moments.length}`;
+}
+
+function galleryKeyNav(e) {
+    if (!document.querySelector('.gallery-modal')) return;
+    if (e.key === 'Escape') document.querySelector('.gallery-modal').remove();
+    if (e.key === 'ArrowLeft') prevGallery();
+    if (e.key === 'ArrowRight') nextGallery();
+}
+
+// Siswa functions sama seperti sebelumnya...
