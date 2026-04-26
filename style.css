@@ -108,10 +108,11 @@ body {
 ===================================== */
 
 .siswa-section{
-    padding: 8rem 0;
+    padding:8rem 0;
     background:
-    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+    linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
     url('./images/momen6.jpeg') center/cover fixed no-repeat;
+    position:relative;
 }
 
 .siswa-container{
@@ -162,15 +163,17 @@ body {
 }
 
 /* OVERLAY */
-.siswa-card::before{
+.siswa-section::before{
     content:'';
     position:absolute;
-    inset:0;
-    background:linear-gradient(to top,
-    rgba(0,0,0,.82) 0%,
-    rgba(0,0,0,.10) 45%,
-    transparent 70%);
-    z-index:1;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:#667eea;
+    filter:blur(130px);
+    top:10%;
+    left:5%;
+    opacity:.35;
 }
 
 /* NAMA */
@@ -189,22 +192,17 @@ body {
 }
 
 /* NOMOR */
-.siswa-card::after{
-    content:attr(data-no);
+.siswa-section::after{
+    content:'';
     position:absolute;
-    top:12px;
-    right:12px;
-    width:36px;
-    height:36px;
+    width:300px;
+    height:300px;
     border-radius:50%;
-    background:linear-gradient(45deg,#667eea,#764ba2);
-    color:#fff;
-    font-weight:700;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:3;
-    box-shadow:0 8px 18px rgba(0,0,0,.25);
+    background:#ff6ec7;
+    filter:blur(130px);
+    bottom:10%;
+    right:5%;
+    opacity:.25;
 }
 
 /* SHINE EFFECT */
