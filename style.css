@@ -399,11 +399,11 @@ body {
 }
 
 .gallery-modal-prev {
-    left: 25px;
+    left: -90px;
 }
 
 .gallery-modal-next {
-    right: 25px;
+    right: -90px;
 }
 
 
