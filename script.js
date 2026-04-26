@@ -94,38 +94,37 @@ function loadStudents() {
     const grid = document.getElementById('siswaGrid');
     grid.innerHTML = '';
     
-    students.forEach((student, index) => {
+    students.forEach(student => {
         const card = document.createElement('div');
         card.className = 'siswa-card';
         card.onclick = () => openModal(student);
-        
         card.innerHTML = `
             <img src="${student.photo}" alt="${student.name}" class="siswa-photo">
-            <div class="siswa-info">
-                <h3 class="siswa-name">${student.name}</h3>
-            </div>
+            <h3 class="siswa-name">${student.name}</h3>
         `;
         grid.appendChild(card);
     });
 }
 
-// Load Slider Momen
+// Load Momen Slider - MANUAL ONLY
 function loadSlider() {
     const slider = document.getElementById('momenSlider');
     const dotsContainer = document.getElementById('sliderDots');
     
-    // Clear existing
     slider.innerHTML = '';
     dotsContainer.innerHTML = '';
     
     moments.forEach((moment, index) => {
-        // Add slide
+        // Slide
         const slide = document.createElement('div');
         slide.className = `slide ${index === 0 ? 'active' : ''}`;
-        slide.innerHTML = `<img src="${moment}" alt="Momen ${index + 1}">`;
+        slide.innerHTML = `
+            <img src="${moment}" alt="Momen ${index + 1}">
+            <div class="slide-caption">Momen ${index + 1} / ${moments.length}</div>
+        `;
         slider.appendChild(slide);
         
-        // Add dot
+        // Dot
         const dot = document.createElement('div');
         dot.className = `dot ${index === 0 ? 'active' : ''}`;
         dot.onclick = () => goToSlide(index);
@@ -133,7 +132,7 @@ function loadSlider() {
     });
 }
 
-// Slider Functions
+// Slider Controls
 function changeSlide(direction) {
     currentSlide += direction;
     if (currentSlide >= moments.length) currentSlide = 0;
@@ -150,7 +149,6 @@ function updateSlider() {
     document.querySelectorAll('.slide').forEach((slide, i) => {
         slide.classList.toggle('active', i === currentSlide);
     });
-    
     document.querySelectorAll('.dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === currentSlide);
     });
@@ -170,10 +168,7 @@ function openModal(student) {
     document.body.appendChild(modal);
 }
 
-// Auto slide
-setInterval(() => changeSlide(1), 5000);
-
-// Init
+// INIT
 document.addEventListener('DOMContentLoaded', () => {
     loadStudents();
     loadSlider();
