@@ -1,3 +1,4 @@
+/* ===== GLOBAL ===== */
 * {
     margin: 0;
     padding: 0;
@@ -9,6 +10,7 @@ body {
     line-height: 1.6;
     color: #333;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -17,11 +19,11 @@ body {
     padding: 0 2rem;
 }
 
-/* HERO SECTION */
+/* ===== HERO BACKGROUND ===== */
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                url('./images/WhatsApp_Image_2026-04-26_at_9.45.03_AM_upscaled.jpeg) center/cover;
+                url('./images/foto-kelas.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,9 +33,10 @@ body {
 
 .hero-overlay {
     background: rgba(0,0,0,0.4);
-    padding: 3rem;
+    padding: 3rem 4rem;
     border-radius: 30px;
     backdrop-filter: blur(10px);
+    max-width: 90%;
 }
 
 .hero-title {
@@ -72,7 +75,7 @@ body {
     display: block;
 }
 
-/* SECTION COMMON */
+/* ===== SECTION TITLES ===== */
 .section-title {
     font-size: 3rem;
     text-align: center;
@@ -83,7 +86,7 @@ body {
     font-weight: 700;
 }
 
-/* GURU SECTION */
+/* ===== GURU/WALI KELAS ===== */
 .guru-section {
     padding: 8rem 0;
     background: #f8f9ff;
@@ -129,7 +132,7 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* SISWA SECTION */
+/* ===== SISWA GRID ===== */
 .siswa-section {
     padding: 8rem 0;
 }
@@ -169,10 +172,9 @@ body {
     font-size: 1.3rem;
     font-weight: 700;
     color: #333;
-    margin-bottom: 0.5rem;
 }
 
-/* MOMEN SECTION */
+/* ===== MOMEN SLIDER 70+ FOTO ===== */
 .momen-section {
     padding: 8rem 0;
     background: #f8f9ff;
@@ -203,6 +205,7 @@ body {
     width: 100%;
     height: 500px;
     object-fit: cover;
+    transition: opacity 0.5s ease;
 }
 
 .slider-nav {
@@ -234,6 +237,7 @@ body {
     justify-content: center;
     gap: 0.5rem;
     margin-top: 2rem;
+    flex-wrap: wrap;
 }
 
 .dot {
@@ -250,24 +254,72 @@ body {
     transform: scale(1.3);
 }
 
-/* RESPONSIVE */
+/* ===== MODAL ZOOM ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    text-align: center;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 10px;
+}
+
+.modal-content h2 {
+    color: white;
+    margin-top: 1rem;
+    font-size: 2rem;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+    .hero-stats { gap: 1.5rem; }
+    .hero-stats div { padding: 0.8rem 1.5rem; }
+    
     .guru-card {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2rem;
     }
     
+    .guru-photo img { height: 300px; }
+    
     .siswa-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1.5rem;
     }
     
-    .hero-stats {
-        gap: 1.5rem;
-    }
+    .section-title { font-size: 2rem; }
     
-    .section-title {
-        font-size: 2rem;
-    }
+    .slider-dots { gap: 0.3rem; }
+    .dot { width: 12px; height: 12px; }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 0 1rem; }
+    .hero-overlay { padding: 2rem; }
 }
