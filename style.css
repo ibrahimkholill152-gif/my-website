@@ -633,3 +633,133 @@ grid-template-columns:1fr 1fr;
         border-radius: 20px;
     }
 }
+
+/* ===================================
+   STRUKTUR KELAS PREMIUM DESIGN
+=================================== */
+
+.struktur-section{
+    padding:8rem 0;
+    background:
+    linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.72)),
+    url('./images/Momen3.jpeg') center/cover fixed no-repeat;
+    position:relative;
+    overflow:hidden;
+}
+
+/* glow background */
+.struktur-section::before{
+    content:'';
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:#667eea;
+    filter:blur(140px);
+    top:0;
+    left:0;
+    opacity:.28;
+}
+
+.struktur-section::after{
+    content:'';
+    position:absolute;
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    background:#ff5fd2;
+    filter:blur(140px);
+    bottom:0;
+    right:0;
+    opacity:.22;
+}
+
+.struktur-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:1.5rem;
+}
+
+/* CARD */
+.struktur-card{
+    background:rgba(255,255,255,.10);
+    backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:28px;
+    padding:1.2rem;
+    text-align:center;
+    transition:.35s ease;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+.struktur-card:hover{
+    transform:translateY(-12px) scale(1.03);
+    box-shadow:0 25px 45px rgba(0,0,0,.38);
+}
+
+/* FOTO */
+.struktur-photo{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:22px;
+    margin-bottom:1rem;
+    transition:.35s ease;
+}
+
+.struktur-card:hover .struktur-photo{
+    transform:scale(1.05);
+}
+
+/* TEXT */
+.struktur-card h3{
+    color:#fff;
+    font-size:1.05rem;
+    margin-bottom:.4rem;
+    font-weight:700;
+}
+
+.struktur-card p{
+    color:#ddd;
+    font-size:.95rem;
+}
+
+/* KHUSUS JABATAN UTAMA */
+.struktur-card.utama{
+    background:linear-gradient(135deg,
+    rgba(102,126,234,.35),
+    rgba(118,75,162,.35));
+    border:1px solid rgba(255,255,255,.22);
+}
+
+.struktur-card.utama h3{
+    color:#FFD700;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.struktur-grid{
+grid-template-columns:repeat(2,1fr);
+gap:1rem;
+}
+
+.struktur-card h3{
+font-size:.92rem;
+}
+
+.struktur-card p{
+font-size:.82rem;
+}
+
+}
+
+@media(max-width:480px){
+
+.struktur-grid{
+grid-template-columns:1fr;
+}
+
+}
