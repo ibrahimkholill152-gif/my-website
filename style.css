@@ -277,16 +277,21 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     position: relative;
-    
+}
+
+.slider-wrapper {
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    height: 120px;
 }
 
 .slider-track {
     display: flex;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.5s ease;
     height: 100%;
     gap: 1rem;
     padding: 1rem 0;
-    
 }
 
 .slider-thumb {
@@ -297,6 +302,7 @@ body {
     cursor: pointer;
     opacity: 0.7;
     transition: all 0.3s ease;
+    border: 3px solid transparent;
 }
 
 .slider-thumb:hover,
@@ -363,8 +369,8 @@ body {
     transform: translateY(-50%) scale(1.1);
 }
 
-.gallery-modal-prev { left: 40px; }
-.gallery-modal-next { right: 40px; }
+.gallery-modal-prev { left: 20px; }
+.gallery-modal-next { right: 20px; }
 
 .gallery-modal-counter {
     position: absolute;
@@ -415,4 +421,5 @@ body {
 
 @media (max-width: 480px) {
     .momen-grid { grid-template-columns: 1fr; grid-template-rows: repeat(10, 160px); }
+}d-template-columns: 1fr; grid-template-rows: repeat(10, 160px); }
 }
