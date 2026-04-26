@@ -264,8 +264,8 @@ body {
     transform: translateY(-50%) scale(1.1);
 }
 
-.gallery-modal-prev { left: 20px; }
-.gallery-modal-next { right: 20px; }
+.gallery-modal-prev { left: 40px; }
+.gallery-modal-next { right: 40px; }
 
 .gallery-modal-counter {
     position: absolute;
