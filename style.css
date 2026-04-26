@@ -317,6 +317,8 @@ body {
 }
 
 .slider-thumb:hover,
+transform: scale(1.08);
+opacity: 1;
 .slider-thumb.active {
     opacity: 1;
     transform: scale(1.05);
