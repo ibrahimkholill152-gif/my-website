@@ -277,21 +277,22 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     position: relative;
+    cursor: grab;  /* Tangan geser */
+    user-select: none;  /* No text select */
+    touch-action: pan-y pinch-zoom;  /* Smooth touch */
 }
 
-.slider-wrapper {
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-    height: 120px;
+.slider-container:active {
+    cursor: grabbing;  /* Tangan pegang */
 }
 
 .slider-track {
     display: flex;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     height: 100%;
     gap: 1rem;
     padding: 1rem 0;
+    will-change: transform;  /* Performance */
 }
 
 .slider-thumb {
@@ -302,7 +303,6 @@ body {
     cursor: pointer;
     opacity: 0.7;
     transition: all 0.3s ease;
-    border: 3px solid transparent;
 }
 
 .slider-thumb:hover,
