@@ -23,8 +23,8 @@ body {
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                url('./images/WhatsApp_Image_2026-04-26_at_9.45.03_AM_upscaled.jpeg
-') center/cover no-repeat;
+                url('./images/WhatsApp_Image_2026-04-26_at_9.45.03_AM_upscaled.jpeg') 
+    center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
