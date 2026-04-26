@@ -88,8 +88,6 @@ const moments = [
 ];
 
 let currentSlide = 0;
-let autoSlideInterval;
-let progressInterval;
 
 function loadSlider() {
     const slider = document.getElementById('momenSlider');
@@ -99,7 +97,7 @@ function loadSlider() {
     dotsContainer.innerHTML = '';
     
     moments.forEach((moment, index) => {
-        // Slide + Caption
+        // Slide dengan caption
         const slide = document.createElement('div');
         slide.className = `slide ${index === 0 ? 'active' : ''}`;
         slide.innerHTML = `
@@ -110,14 +108,12 @@ function loadSlider() {
         `;
         slider.appendChild(slide);
         
-        // Dot
+        // Dot indicator
         const dot = document.createElement('div');
         dot.className = `dot ${index === 0 ? 'active' : ''}`;
         dot.onclick = () => goToSlide(index);
         dotsContainer.appendChild(dot);
     });
-    
-    startAutoSlide();
 }
 
 function changeSlide(direction) {
@@ -133,41 +129,25 @@ function goToSlide(index) {
 }
 
 function updateSlider() {
-    // Update slides
+    // Update active slide
     document.querySelectorAll('.slide').forEach((slide, i) => {
         slide.classList.toggle('active', i === currentSlide);
     });
     
-    // Update dots
+    // Update active dot
     document.querySelectorAll('.dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === currentSlide);
     });
     
-    // Reset progress
-    document.getElementById('progressFill').style.width = '0%';
+    // Update progress manual (kosongkan)
+    const progress = document.getElementById('progressFill');
+    if (progress) progress.style.width = '0%';
 }
 
-function startAutoSlide() {
-    autoSlideInterval = setInterval(() => {
-        changeSlide(1);
-    }, 5000);
-    
-    // Progress bar
-    progressInterval = setInterval(() => {
-        const progress = document.getElementById('progressFill');
-        const width = parseFloat(progress.style.width) || 0;
-        progress.style.width = Math.min(width + 2, 100) + '%';
-    }, 100);
-}
-
-// Pause on hover
-document.querySelector('.slider-container').addEventListener('mouseenter', () => {
-    clearInterval(autoSlideInterval);
-    clearInterval(progressInterval);
+// Load saat halaman dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    loadSlider();
 });
-
-document.querySelector('.slider-container').addEventListener('mouseleave', startAutoSlide);
-
 // Init
 document.addEventListener('DOMContentLoaded', loadSlider);
 });
