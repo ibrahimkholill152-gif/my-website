@@ -147,19 +147,20 @@ function loadMomenGrid() {
 function loadSlider() {
     const track = document.getElementById('momenSlider');
     track.innerHTML = '';
-    
+
     moments.forEach((moment, index) => {
         const thumb = document.createElement('img');
-        thumb.className = `slider-thumb ${index === 0 ? 'active' : ''}`;
+        thumb.className = 'slider-thumb';
         thumb.src = moment;
         thumb.alt = `Momen ${index + 1}`;
+
         thumb.onclick = () => {
-            currentSlide = index;
-            updateSliderTrack();
             openGalleryModal(index);
         };
+
         track.appendChild(thumb);
     });
+}
     
 }
 
