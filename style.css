@@ -42,20 +42,107 @@ body {
 }
 
 /* Guru */
-.guru-section { padding: 8rem 0; background: #f8f9ff; }
+/* GURU SECTION - BACKGROUND FOTO */
+.guru-section {
+    padding: 8rem 0;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                url('./images/guru-bg.jpg') center/cover fixed;
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+}
+
+.guru-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(102,126,234,0.1);
+    z-index: 1;
+}
+
+.guru-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
 .guru-card {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
-    align-items: center; max-width: 1000px; margin: 0 auto;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
 }
+
+.guru-photo {
+    position: relative;
+}
+
 .guru-photo img {
-    width: 100%; height: 400px; object-fit: cover; border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    transition: all 0.4s ease;
 }
-.guru-info h3 { font-size: 2.5rem; margin-bottom: 1rem; color: #333; }
-.guru-info p { font-size: 1.2rem; color: #666; margin-bottom: 2rem; }
+
+.guru-photo img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+
+.guru-info {
+    padding: 2rem;
+}
+
+.guru-info h3 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: #333;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.guru-info p {
+    font-size: 1.3rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
 .guru-motto {
-    font-size: 1.4rem; font-style: italic; color: #667eea; font-weight: 500;
-    padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    font-size: 1.6rem;
+    font-style: italic;
+    color: #667eea;
+    font-weight: 600;
+    padding: 2.5rem;
+    background: rgba(255,255,255,0.8);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    border-left: 5px solid #667eea;
+    position: relative;
+}
+
+.guru-motto::before {
+    content: '"';
+    font-size: 4rem;
+    color: #667eea;
+    position: absolute;
+    left: 20px;
+    top: -10px;
 }
 
 /* Siswa */
