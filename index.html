@@ -50,21 +50,36 @@
     </section>
 
     <!-- Momen Section dengan Slider -->
-    <section class="momen-section">
-        <div class="container">
-            <h2 class="section-title">📸 Moment</h2>
-            <div class="slider-container">
-                <div class="slider" id="momenSlider">
-                    <!-- Slides loaded via JS -->
-                </div>
-                <div class="slider-nav">
-                    <button class="nav-btn prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-                    <button class="nav-btn next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <div class="slider-dots" id="sliderDots"></div>
+    <!-- MOMEN SECTION - Update di index.html -->
+<section class="momen-section">
+    <div class="container">
+        <h2 class="section-title">📸 Momen Bersama</h2>
+        <div class="slider-container">
+            <!-- Progress Bar -->
+            <div class="slider-progress">
+                <div class="progress-fill" id="progressFill"></div>
             </div>
+            
+            <!-- Slides -->
+            <div class="slider" id="momenSlider">
+                <!-- JS auto-generate 70 slides -->
+            </div>
+            
+            <!-- Navigation -->
+            <div class="slider-nav">
+                <button class="nav-btn prev" onclick="changeSlide(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-btn next" onclick="changeSlide(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <!-- Dots -->
+            <div class="slider-dots" id="sliderDots"></div>
         </div>
-    </section>
+    </div>
+</section>
 
     <script src="script.js"></script>
 </body>
