@@ -48,24 +48,26 @@
         </div>
     </section>
 
-    <!-- Momen Section - MANUAL SLIDER -->
-    <section class="momen-section">
-        <div class="container">
-            <h2 class="section-title">📸 Momen Bersama</h2>
-            <div class="slider-container">
-                <div class="slider" id="momenSlider"></div>
-                <div class="slider-nav">
-                    <button class="nav-btn prev" onclick="changeSlide(-1)">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="nav-btn next" onclick="changeSlide(1)">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                <div class="slider-dots" id="sliderDots"></div>
+   <!-- MOMEN SECTION - 2x5 GRID + SLIDER -->
+<section class="momen-section">
+    <div class="container">
+        <h2 class="section-title">📸 Galeri Momen</h2>
+        
+        <!-- 2 Baris x 5 Kolom Grid -->
+        <div class="momen-grid" id="momenGrid"></div>
+        
+        <!-- Thumbnail Slider Dibawah -->
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                <div class="slider-track" id="momenSlider"></div>
+            </div>
+            <div class="slider-nav">
+                <button class="nav-btn prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-btn next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <script src="script.js"></script>
 </body>
