@@ -107,96 +107,182 @@ body {
    copy paste ganti css siswa lama
 ===================================== */
 
+/* ==========================================
+   SISWA SECTION FULL PREMIUM (LENGKAP)
+   GANTI SEMUA CSS siswa lama dengan ini
+========================================== */
+
+/* SECTION */
 .siswa-section{
-    padding:8rem 0;
+    padding: 8rem 0;
     background:
-    linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+    linear-gradient(rgba(0,0,0,.68), rgba(0,0,0,.68)),
     url('./images/momen6.jpeg') center/cover fixed no-repeat;
-    position:relative;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
 }
 
+/* Glow background kiri */
+.siswa-section::before{
+    content:'';
+    position:absolute;
+    width:360px;
+    height:360px;
+    border-radius:50%;
+    background:#667eea;
+    filter:blur(140px);
+    top:5%;
+    left:-80px;
+    opacity:.25;
+}
+
+/* Glow background kanan */
+.siswa-section::after{
+    content:'';
+    position:absolute;
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    background:#ff58c8;
+    filter:blur(140px);
+    bottom:5%;
+    right:-60px;
+    opacity:.18;
+}
+
+/* CONTAINER */
 .siswa-container{
-    width: 100%;
-    max-width: 1450px;
-    margin: auto;
-    padding: 0 1.5rem;
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:1450px;
+    margin:auto;
+    padding:0 1.5rem;
 }
 
+/* GRID */
 .siswa-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:1.5rem;
 }
 
 /* CARD */
-/* CARD TRANSPARAN TAPI EFEK TETAP ADA */
 .siswa-card{
-    background: rgba(255,255,255,.03) !important;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,.12);
-    position: relative;
-    overflow: hidden;
+    position:relative;
+    overflow:hidden;
+    border-radius:28px;
+    cursor:pointer;
+
+    background:rgba(255,255,255,.03);
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.05);
+
+    transition:all .35s ease;
 }
 
-/* EFEK OVERLAY */
+/* Hover Card */
+.siswa-card:hover{
+    transform:translateY(-12px) scale(1.03);
+    box-shadow:
+    0 25px 55px rgba(0,0,0,.38),
+    0 0 20px rgba(102,126,234,.18);
+}
+
+/* FOTO */
+.siswa-photo{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    transition:transform .45s ease;
+}
+
+/* Hover zoom foto */
+.siswa-card:hover .siswa-photo{
+    transform:scale(1.08);
+}
+
+/* Overlay gradient bawah */
 .siswa-card::before{
     content:'';
     position:absolute;
     inset:0;
     background:linear-gradient(
         to top,
-        rgba(0,0,0,.75) 0%,
-        rgba(0,0,0,.15) 45%,
-        transparent 75%
+        rgba(0,0,0,.88) 0%,
+        rgba(0,0,0,.18) 42%,
+        transparent 72%
     );
     z-index:1;
 }
 
-/* NOMOR URUT */
+/* Nomor urut */
 .siswa-card::after{
     content:attr(data-no);
     position:absolute;
     top:12px;
     right:12px;
-    width:34px;
-    height:34px;
+
+    width:36px;
+    height:36px;
     border-radius:50%;
+
     background:linear-gradient(45deg,#667eea,#764ba2);
     color:white;
+    font-size:.95rem;
     font-weight:700;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     z-index:5;
-    box-shadow:0 8px 18px rgba(0,0,0,.25);
+    box-shadow:0 10px 18px rgba(0,0,0,.25);
+
+    transition:.3s ease;
 }
 
-/* FOTO */
-.siswa-photo{
-    position:relative;
-    z-index:0;
+/* Hover nomor */
+.siswa-card:hover::after{
+    transform:scale(1.08) rotate(8deg);
 }
 
-/* NAMA */
+/* Nama */
 .siswa-name{
     position:absolute;
     bottom:0;
     left:0;
     width:100%;
+
+    padding:1rem .9rem;
+    text-align:center;
+
+    color:white;
+    font-size:1rem;
+    font-weight:700;
+    letter-spacing:.3px;
+
     z-index:3;
 }
-/* SHINE EFFECT */
+
+/* Shine effect */
 .siswa-card span{
     position:absolute;
     inset:0;
     background:linear-gradient(
         120deg,
         transparent 20%,
-        rgba(255,255,255,.18) 50%,
+        rgba(255,255,255,.15) 50%,
         transparent 80%
     );
     transform:translateX(-130%);
-    transition:.6s;
+    transition:.7s ease;
     z-index:2;
 }
 
@@ -204,8 +290,13 @@ body {
     transform:translateX(130%);
 }
 
-/* MOBILE */
+/* Responsive Tablet */
 @media(max-width:768px){
+
+.siswa-section{
+padding:6rem 0;
+background-attachment:scroll;
+}
 
 .siswa-grid{
 grid-template-columns:repeat(2,1fr);
@@ -214,21 +305,33 @@ gap:1rem;
 
 .siswa-name{
 font-size:.88rem;
-padding:.8rem;
+padding:.8rem .5rem;
 }
 
 .siswa-card::after{
 width:30px;
 height:30px;
-font-size:.8rem;
+font-size:.78rem;
+top:10px;
+right:10px;
 }
 
 }
 
+/* Responsive HP */
 @media(max-width:480px){
 
 .siswa-grid{
-grid-template-columns:1fr 1fr;
+grid-template-columns:repeat(2,1fr);
+gap:.8rem;
+}
+
+.siswa-card{
+border-radius:20px;
+}
+
+.siswa-name{
+font-size:.78rem;
 }
 
 }
