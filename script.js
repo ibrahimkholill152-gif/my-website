@@ -88,52 +88,38 @@ const moments = [
 ];
 
 let currentSlide = 0;
+let autoSlideInterval;
+let progressInterval;
 
-// Load Siswa
-function loadStudents() {
-    const grid = document.getElementById('siswaGrid');
-    grid.innerHTML = '';
-    
-    students.forEach((student, index) => {
-        const card = document.createElement('div');
-        card.className = 'siswa-card';
-        card.onclick = () => openModal(student);
-        
-        card.innerHTML = `
-            <img src="${student.photo}" alt="${student.name}" class="siswa-photo">
-            <div class="siswa-info">
-                <h3 class="siswa-name">${student.name}</h3>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
-}
-
-// Load Slider Momen
 function loadSlider() {
     const slider = document.getElementById('momenSlider');
     const dotsContainer = document.getElementById('sliderDots');
     
-    // Clear existing
     slider.innerHTML = '';
     dotsContainer.innerHTML = '';
     
     moments.forEach((moment, index) => {
-        // Add slide
+        // Slide + Caption
         const slide = document.createElement('div');
         slide.className = `slide ${index === 0 ? 'active' : ''}`;
-        slide.innerHTML = `<img src="${moment}" alt="Momen ${index + 1}">`;
+        slide.innerHTML = `
+            <img src="${moment}" alt="Momen ${index + 1}">
+            <div class="slide-caption">
+                Momen ${index + 1} / ${moments.length}
+            </div>
+        `;
         slider.appendChild(slide);
         
-        // Add dot
+        // Dot
         const dot = document.createElement('div');
         dot.className = `dot ${index === 0 ? 'active' : ''}`;
         dot.onclick = () => goToSlide(index);
         dotsContainer.appendChild(dot);
     });
+    
+    startAutoSlide();
 }
 
-// Slider Functions
 function changeSlide(direction) {
     currentSlide += direction;
     if (currentSlide >= moments.length) currentSlide = 0;
@@ -147,34 +133,41 @@ function goToSlide(index) {
 }
 
 function updateSlider() {
+    // Update slides
     document.querySelectorAll('.slide').forEach((slide, i) => {
         slide.classList.toggle('active', i === currentSlide);
     });
     
+    // Update dots
     document.querySelectorAll('.dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === currentSlide);
     });
+    
+    // Reset progress
+    document.getElementById('progressFill').style.width = '0%';
 }
 
-// Modal Siswa
-function openModal(student) {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <span class="close" onclick="this.closest('.modal').remove()">&times;</span>
-            <img src="${student.photo}" alt="${student.name}">
-            <h2>${student.name}</h2>
-        </div>
-    `;
-    document.body.appendChild(modal);
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        changeSlide(1);
+    }, 5000);
+    
+    // Progress bar
+    progressInterval = setInterval(() => {
+        const progress = document.getElementById('progressFill');
+        const width = parseFloat(progress.style.width) || 0;
+        progress.style.width = Math.min(width + 2, 100) + '%';
+    }, 100);
 }
 
-// Auto slide
-setInterval(() => changeSlide(1), 5000);
+// Pause on hover
+document.querySelector('.slider-container').addEventListener('mouseenter', () => {
+    clearInterval(autoSlideInterval);
+    clearInterval(progressInterval);
+});
+
+document.querySelector('.slider-container').addEventListener('mouseleave', startAutoSlide);
 
 // Init
-document.addEventListener('DOMContentLoaded', () => {
-    loadStudents();
-    loadSlider();
+document.addEventListener('DOMContentLoaded', loadSlider);
 });
