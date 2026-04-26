@@ -99,7 +99,7 @@ function loadStudents() {
     
     students.forEach((student, index) => {
         const card = document.createElement('div');
-        card.className = 'siswa-card';
+        card.setAttribute("data-no", index + 1);
         card.onclick = () => openSiswaModal(student);
         card.innerHTML = `
             <img src="${student.photo}" alt="${student.name}" class="siswa-photo">
