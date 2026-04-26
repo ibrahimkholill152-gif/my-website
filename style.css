@@ -274,51 +274,43 @@ body {
 
 /* Thumbnail Slider */
 .slider-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
+    max-width: 1100px;
+    margin: auto;
 }
 
 .slider-wrapper {
     overflow-x: auto;
     overflow-y: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
     scroll-behavior: smooth;
-    border-radius: 20px;
-    padding-bottom: 10px;
 }
 
-/* Hilangin scrollbar */
 .slider-wrapper::-webkit-scrollbar {
     display: none;
 }
-.slider-wrapper {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-}
 
 .slider-track {
-    display: flex;
-    gap: 1rem;
-    width: max-content;
-    padding: 1rem;
-}
+    display: inline-flex;
+    gap: 15px;
+    padding: 10px;
 }
 
 .slider-thumb {
-    flex: 0 0 150px;
-    height: 100px;
+    width: 170px;
+    height: 110px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 15px;
     cursor: pointer;
-    opacity: 0.7;
-    transition: all 0.3s ease;
-    border: 3px solid transparent;
+    flex-shrink: 0;
+    transition: 0.3s;
+    opacity: 0.8;
 }
 
-.slider-thumb:hover,
-transform: scale(1.08);
-opacity: 1;
+.slider-thumb:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
 .slider-thumb.active {
     opacity: 1;
     transform: scale(1.05);
