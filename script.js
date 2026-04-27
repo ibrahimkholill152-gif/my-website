@@ -34,23 +34,16 @@ const students = [
     { name: "Zahratus Dzihni Sayidah", photo: "./images/Dzihni.jpg" }
 ];
 
-// ============================================
-// DATA MOMEN
-// ============================================
+// Data Momen
 const moments = [];
-
-for(let i = 1; i <= 49; i++){
+for(let i=1;i<=49;i++){
     moments.push(`./images/Momen${i}.jpeg`);
 }
 
-// ============================================
-// GLOBAL
-// ============================================
 let currentGalleryIndex = 0;
-let currentSlide = 0;
 
 // ============================================
-// LOAD SISWA
+// SISWA
 // ============================================
 function loadStudents(){
     const grid = document.getElementById("siswaGrid");
@@ -59,9 +52,10 @@ function loadStudents(){
     grid.innerHTML = "";
 
     students.forEach((student,index)=>{
+
         const card = document.createElement("div");
         card.className = "siswa-card";
-        card.setAttribute("data-no", index + 1);
+        card.setAttribute("data-no", index+1);
 
         card.innerHTML = `
             <img src="${student.photo}" class="siswa-photo">
@@ -74,16 +68,15 @@ function loadStudents(){
     });
 }
 
-// ============================================
-// MODAL SISWA
-// ============================================
 function openSiswaModal(student){
     const modal = document.createElement("div");
     modal.className = "gallery-modal";
 
     modal.innerHTML = `
         <div class="gallery-modal-content">
-            <button class="gallery-modal-close" onclick="this.closest('.gallery-modal').remove()">&times;</button>
+            <button class="gallery-modal-close"
+            onclick="this.closest('.gallery-modal').remove()">&times;</button>
+
             <img src="${student.photo}">
         </div>
     `;
@@ -92,7 +85,7 @@ function openSiswaModal(student){
 }
 
 // ============================================
-// GALERI PINTEREST
+// GALERI FOTO 2x5
 // ============================================
 function loadMomenGrid(){
     const grid = document.getElementById("momenGrid");
@@ -100,11 +93,10 @@ function loadMomenGrid(){
 
     grid.innerHTML = "";
 
-    const styles = ["square","tall","wide"];
+    moments.slice(0,10).forEach((img,index)=>{
 
-    moments.forEach((img,index)=>{
         const item = document.createElement("div");
-        item.className = `momen-photo ${styles[index % 3]}`;
+        item.className = "momen-photo";
 
         item.innerHTML = `
             <img src="${img}" onclick="openGalleryModal(${index})">
@@ -115,7 +107,7 @@ function loadMomenGrid(){
 }
 
 // ============================================
-// THUMBNAIL SLIDER
+// SLIDER BAWAH (GESER JARI / CURSOR)
 // ============================================
 function loadSlider(){
     const track = document.getElementById("momenSlider");
@@ -124,57 +116,78 @@ function loadSlider(){
     track.innerHTML = "";
 
     moments.forEach((img,index)=>{
+
         const thumb = document.createElement("img");
         thumb.src = img;
         thumb.className = "slider-thumb";
 
-        if(index === 0){
-            thumb.classList.add("active");
-        }
-
-        thumb.onclick = ()=>{
-            currentSlide = index;
-            updateSlider();
-            openGalleryModal(index);
-        };
+        thumb.onclick = ()=> openGalleryModal(index);
 
         track.appendChild(thumb);
     });
 
-    updateSlider();
+    enableDragSlider(track);
 }
 
-function changeSlide(step){
-    currentSlide += step;
+// ============================================
+// DRAG SLIDER
+// ============================================
+function enableDragSlider(track){
 
-    if(currentSlide < 0) currentSlide = 0;
-    if(currentSlide > moments.length - 1){
-        currentSlide = moments.length - 1;
-    }
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-    updateSlider();
-}
+    track.addEventListener("mousedown",(e)=>{
+        isDown = true;
+        startX = e.pageX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+        track.style.cursor = "grabbing";
+    });
 
-function updateSlider(){
-    const track = document.getElementById("momenSlider");
-    if(!track) return;
+    track.addEventListener("mouseleave",()=>{
+        isDown = false;
+        track.style.cursor = "grab";
+    });
 
-    const width =
-        window.innerWidth <= 480 ? 126 :
-        window.innerWidth <= 768 ? 146 : 186;
+    track.addEventListener("mouseup",()=>{
+        isDown = false;
+        track.style.cursor = "grab";
+    });
 
-    track.style.transform =
-        `translateX(-${currentSlide * width}px)`;
+    track.addEventListener("mousemove",(e)=>{
+        if(!isDown) return;
 
-    document.querySelectorAll(".slider-thumb").forEach((thumb,i)=>{
-        thumb.classList.toggle("active", i === currentSlide);
+        e.preventDefault();
+
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.5;
+
+        track.scrollLeft = scrollLeft - walk;
+    });
+
+    // HP TOUCH
+    let touchStart = 0;
+    let touchScroll = 0;
+
+    track.addEventListener("touchstart",(e)=>{
+        touchStart = e.touches[0].pageX;
+        touchScroll = track.scrollLeft;
+    });
+
+    track.addEventListener("touchmove",(e)=>{
+        const move = e.touches[0].pageX;
+        const walk = (move - touchStart) * 1.5;
+
+        track.scrollLeft = touchScroll - walk;
     });
 }
 
 // ============================================
-// MODAL GALERI PREMIUM
+// MODAL GALERI
 // ============================================
-unction openGalleryModal(index){
+function openGalleryModal(index){
+
     currentGalleryIndex = index;
 
     const modal = document.createElement("div");
@@ -200,32 +213,37 @@ unction openGalleryModal(index){
 
     document.body.appendChild(modal);
 
-    document.addEventListener("keydown",galleryKeyNav);
+    document.addEventListener("keydown", galleryKeyNav);
 }
 
 function closeGalleryModal(){
     document.querySelector(".gallery-modal")?.remove();
-    document.removeEventListener("keydown",galleryKeyNav);
+    document.removeEventListener("keydown", galleryKeyNav);
 }
 
 function prevGallery(){
     currentGalleryIndex--;
+
     if(currentGalleryIndex < 0){
         currentGalleryIndex = moments.length - 1;
     }
+
     updateGallery();
 }
 
 function nextGallery(){
     currentGalleryIndex++;
+
     if(currentGalleryIndex >= moments.length){
         currentGalleryIndex = 0;
     }
+
     updateGallery();
 }
 
 function updateGallery(){
     const img = document.getElementById("galleryMainImage");
+
     if(img){
         img.src = moments[currentGalleryIndex];
     }
@@ -241,7 +259,9 @@ function galleryKeyNav(e){
 // INIT
 // ============================================
 document.addEventListener("DOMContentLoaded",()=>{
+
     loadStudents();
     loadMomenGrid();
     loadSlider();
+
 });
