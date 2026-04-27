@@ -1,4 +1,6 @@
-// Data Siswa (30 orang)
+// ============================================
+// DATA SISWA
+// ============================================
 const students = [
     { name: "Ahmad Fariski", photo: "./images/Fariski.jpg" },
     { name: "Alya Putri Sartika", photo: "./images/Alya.jpg" },
@@ -8,20 +10,20 @@ const students = [
     { name: "Carissa Alzena Yuniar", photo: "./images/Carrisa.jpg" },
     { name: "Effeline Avriliandoko", photo: "./images/Effeline.jpg" },
     { name: "Firyal Ariqah", photo: "./images/Firyal.jpg" },
-    { name: "Halilah Azka Rauf", photo: "./images/.jpg" },
+    { name: "Halilah Azka Rauf", photo: "./images/default.jpg" },
     { name: "Ibrahim Kholil Alkatsiri", photo: "./images/Kholil.jpg" },
     { name: "Jahrotu Syita", photo: "./images/SYita.jpg" },
     { name: "Livia Nur Hafizah", photo: "./images/Livia.jpg" },
     { name: "Luqman Ahsan Yasir", photo: "./images/Lukman.jpg" },
     { name: "M Bagus Surya Darma", photo: "./images/Bagus.jpg" },
     { name: "Muhamad Zidane", photo: "./images/Jidan.jpg" },
-    { name: "M Azhari Anhar", photo: "./images/.jpg" },
+    { name: "M Azhari Anhar", photo: "./images/default.jpg" },
     { name: "M Fadel Arif Abdul Malik", photo: "./images/Fadel.jpg" },
     { name: "M Irfandi Yusuf", photo: "./images/Irfandi.jpg" },
     { name: "M Rizki Taqiyudin Kamil", photo: "./images/Taqi.jpg" },
     { name: "Nadhira Salma Apriyani", photo: "./images/NAdhira.jpg" },
     { name: "Nuril Shabrina", photo: "./images/Nuril.jpg" },
-    { name: "Putra Ahmad Fauzi", photo: "./images/.jpg" },
+    { name: "Putra Ahmad Fauzi", photo: "./images/default.jpg" },
     { name: "Radhitya Raffa Janafi", photo: "./images/Raffa.jpg" },
     { name: "Raisha Putri Rahmadani", photo: "./images/Eca.jpg" },
     { name: "Rizky Putra Anugrah", photo: "./images/Putra.jpg" },
@@ -29,263 +31,92 @@ const students = [
     { name: "Shava Azzahra U.T", photo: "./images/Shava.jpg" },
     { name: "Syeima Ibrahim Lubis", photo: "./images/Syeima.jpg" },
     { name: "Wisnu Ardhi Winata", photo: "./images/Wisnu.jpg" },
-    { name: "Zahratus Dzihni Sayidah", photo: "./images/Dzihni.jpg" },
-    // Tambah 27 lagi atau generate random
+    { name: "Zahratus Dzihni Sayidah", photo: "./images/Dzihni.jpg" }
 ];
 
-// Data Momen (foto kelompok)
-const moments = [
-    "./images/Momen1.jpeg",
-    "./images/Momen2.jpeg",
-    "./images/Momen3.jpeg",
-    "./images/Momen4.jpeg",
-    "./images/Momen5.jpeg",
-    "./images/Momen6.jpeg",
-    "./images/Momen7.jpeg",
-    "./images/Momen8.jpeg",
-    "./images/Momen9.jpeg",
-    "./images/Momen10.jpeg",
-    "./images/Momen11.jpeg",
-    "./images/Momen12.jpeg",
-    "./images/Momen13.jpeg",
-    "./images/Momen14.jpeg",
-    "./images/Momen15.jpeg",
-    "./images/Momen16.jpeg",
-    "./images/Momen17.jpeg",
-    "./images/Momen18.jpeg",
-    "./images/Momen19.jpeg",
-    "./images/Momen20.jpeg",
-    "./images/Momen21.jpeg",
-    "./images/Momen22.jpeg",
-    "./images/Momen23.jpeg",
-    "./images/Momen24.jpeg",
-    "./images/Momen25.jpeg",
-    "./images/Momen26.jpeg",
-    "./images/Momen27.jpeg",
-    "./images/Momen28.jpeg",
-    "./images/Momen29.jpeg",
-    "./images/Momen30.jpeg",
-    "./images/Momen31.jpeg",
-    "./images/Momen32.jpeg",
-    "./images/Momen33.jpeg",
-    "./images/Momen34.jpeg",
-    "./images/Momen35.jpeg",
-    "./images/Momen36.jpeg",
-    "./images/Momen37.jpeg",
-    "./images/Momen38.jpeg",
-    "./images/Momen39.jpeg",
-    "./images/Momen40.jpeg",
-    "./images/Momen41.jpeg",
-    "./images/Momen42.jpeg",
-    "./images/Momen43.jpeg",
-    "./images/Momen44.jpeg",
-    "./images/Momen45.jpeg",
-    "./images/Momen46.jpeg",
-    "./images/Momen47.jpeg",
-    "./images/Momen48.jpeg",
-    "./images/Momen49.jpeg",
-    
-];
+// ============================================
+// DATA MOMEN
+// ============================================
+const moments = [];
 
-let currentSlide = 0;
+for(let i = 1; i <= 49; i++){
+    moments.push(`./images/Momen${i}.jpeg`);
+}
+
+// ============================================
+// GLOBAL
+// ============================================
 let currentGalleryIndex = 0;
+let currentSlide = 0;
 
 // ============================================
-// SISWA FUNCTIONS (Tetep sama)
+// LOAD SISWA
 // ============================================
-/* =====================================
-   GANTI FUNCTION loadStudents()
-===================================== */
+function loadStudents(){
+    const grid = document.getElementById("siswaGrid");
+    if(!grid) return;
 
-function loadStudents() {
-    const grid = document.getElementById('siswaGrid');
-    grid.innerHTML = '';
+    grid.innerHTML = "";
 
-    students.forEach((student, index) => {
-        const card = document.createElement('div');
-
-        card.className = 'siswa-card';
-        card.setAttribute('data-no', index + 1);
-
-        card.onclick = () => openSiswaModal(student);
+    students.forEach((student,index)=>{
+        const card = document.createElement("div");
+        card.className = "siswa-card";
+        card.setAttribute("data-no", index + 1);
 
         card.innerHTML = `
-            <img src="${student.photo}" alt="${student.name}" class="siswa-photo">
-            <span></span>
+            <img src="${student.photo}" class="siswa-photo">
             <h3 class="siswa-name">${student.name}</h3>
         `;
+
+        card.onclick = ()=> openSiswaModal(student);
 
         grid.appendChild(card);
     });
 }
-function openSiswaModal(student) {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <span class="close" onclick="this.closest('.modal').remove()">&times;</span>
-            <img src="${student.photo}" alt="${student.name}">
-            <h2>${student.name}</h2>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
 
 // ============================================
-// MOMEN 2x5 GRID + SLIDER + MODAL
+// MODAL SISWA
 // ============================================
-
-// 1. Load 2x5 Grid (10 foto pertama)
-function loadMomenGrid() {
-    const grid = document.getElementById('momenGrid');
-    grid.innerHTML = '';
-    
-    moments.slice(0, 10).forEach((moment, index) => {
-        const photo = document.createElement('div');
-        photo.className = 'momen-photo-container';
-        photo.innerHTML = `
-            <img src="${moment}" alt="Momen ${index + 1}" 
-                 class="momen-photo" 
-                 onclick="openGalleryModal(${index})">
-        `;
-        grid.appendChild(photo);
-    });
-}
-
-// 2. Load Thumbnail Slider (70 foto)
-function loadSlider() {
-    const track = document.getElementById('momenSlider');
-    track.innerHTML = '';
-
-    moments.forEach((moment, index) => {
-        const img = document.createElement('img');
-        img.src = moment;
-        img.className = 'slider-thumb';
-
-        img.onclick = () => {
-            openGalleryModal(index);
-        };
-
-        track.appendChild(img);
-    });
-}
-// 3. Update slider position
-function updateSliderTrack() {
-    const track = document.getElementById('momenSlider');
-    const thumbWidth = 166; // 150px + 16px gap
-    track.style.transform = `translateX(-${currentSlide * thumbWidth}px)`;
-    
-    // Update active thumb
-    document.querySelectorAll('.slider-thumb').forEach((thumb, i) => {
-        thumb.classList.toggle('active', i === currentSlide);
-    });
-}
-
-// 4. Gallery Modal Fullscreen
-/* ==========================================
-   GALERI PREMIUM FULL JS
-========================================== */
-
-function openGalleryModal(index) {
-    currentGalleryIndex = index;
-
-    const thumbsHTML = moments.map((img, i) => `
-        <img src="${img}" 
-             class="gallery-thumb ${i === index ? 'active' : ''}"
-             onclick="jumpGallery(${i})">
-    `).join('');
-
-    const modal = document.createElement('div');
-    modal.className = 'gallery-modal';
+function openSiswaModal(student){
+    const modal = document.createElement("div");
+    modal.className = "gallery-modal";
 
     modal.innerHTML = `
         <div class="gallery-modal-content">
-
-            <button class="gallery-modal-close" onclick="closeGalleryModal()">
-                <i class="fas fa-times"></i>
-            </button>
-
-            <button class="gallery-modal-nav gallery-modal-prev" onclick="prevGallery()">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-
-            <button class="gallery-modal-nav gallery-modal-next" onclick="nextGallery()">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-
-            <div class="gallery-modal-counter">
-                ${index + 1} / ${moments.length}
-            </div>
-
-            <img id="galleryMainImage" src="${moments[index]}">
-
-            <div class="gallery-thumbs">
-                ${thumbsHTML}
-            </div>
-
+            <button class="gallery-modal-close" onclick="this.closest('.gallery-modal').remove()">&times;</button>
+            <img src="${student.photo}">
         </div>
     `;
 
     document.body.appendChild(modal);
-
-    document.addEventListener('keydown', galleryKeyNav);
 }
 
-function closeGalleryModal() {
-    document.querySelector('.gallery-modal')?.remove();
-    document.removeEventListener('keydown', galleryKeyNav);
-}
+// ============================================
+// GALERI PINTEREST
+// ============================================
+function loadMomenGrid(){
+    const grid = document.getElementById("momenGrid");
+    if(!grid) return;
 
-function prevGallery() {
-    currentGalleryIndex--;
-    if (currentGalleryIndex < 0) currentGalleryIndex = moments.length - 1;
-    updateGalleryModal();
-}
+    grid.innerHTML = "";
 
-function nextGallery() {
-    currentGalleryIndex++;
-    if (currentGalleryIndex >= moments.length) currentGalleryIndex = 0;
-    updateGalleryModal();
-}
+    const styles = ["square","tall","wide"];
 
-function jumpGallery(index) {
-    currentGalleryIndex = index;
-    updateGalleryModal();
-}
+    moments.forEach((img,index)=>{
+        const item = document.createElement("div");
+        item.className = `momen-photo ${styles[index % 3]}`;
 
-function updateGalleryModal() {
-    const img = document.getElementById('galleryMainImage');
-    const counter = document.querySelector('.gallery-modal-counter');
+        item.innerHTML = `
+            <img src="${img}" onclick="openGalleryModal(${index})">
+        `;
 
-    img.src = moments[currentGalleryIndex];
-    counter.innerText = `${currentGalleryIndex + 1} / ${moments.length}`;
-
-    document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
-        thumb.classList.toggle('active', i === currentGalleryIndex);
+        grid.appendChild(item);
     });
 }
 
-function galleryKeyNav(e) {
-    if (e.key === 'Escape') closeGalleryModal();
-    if (e.key === 'ArrowLeft') prevGallery();
-    if (e.key === 'ArrowRight') nextGallery();
-}
 // ============================================
-// INIT - Load Semua
+// THUMBNAIL SLIDER
 // ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    loadStudents();    // Siswa grid
-    loadMomenGrid();   // 2x5 momen grid
-    loadSlider();      // Thumbnail slider
-});
-/* =========================================
-   SLIDER GALERI BAWAH
-   TAMBAHKAN KE script.js
-========================================= */
-
-let currentSlide = 0;
-
-/* load thumbnail */
 function loadSlider(){
     const track = document.getElementById("momenSlider");
     if(!track) return;
@@ -296,11 +127,16 @@ function loadSlider(){
         const thumb = document.createElement("img");
         thumb.src = img;
         thumb.className = "slider-thumb";
-        thumb.onclick = ()=> openGalleryModal(index);
 
         if(index === 0){
             thumb.classList.add("active");
         }
+
+        thumb.onclick = ()=>{
+            currentSlide = index;
+            updateSlider();
+            openGalleryModal(index);
+        };
 
         track.appendChild(thumb);
     });
@@ -308,39 +144,141 @@ function loadSlider(){
     updateSlider();
 }
 
-/* geser kiri kanan */
 function changeSlide(step){
-    const total = moments.length - 1;
-
     currentSlide += step;
 
     if(currentSlide < 0) currentSlide = 0;
-    if(currentSlide > total) currentSlide = total;
+    if(currentSlide > moments.length - 1){
+        currentSlide = moments.length - 1;
+    }
 
     updateSlider();
 }
 
-/* update posisi */
 function updateSlider(){
     const track = document.getElementById("momenSlider");
     if(!track) return;
 
-    const width = window.innerWidth <= 480 ? 126 :
-                  window.innerWidth <= 768 ? 146 : 186;
+    const width =
+        window.innerWidth <= 480 ? 126 :
+        window.innerWidth <= 768 ? 146 : 186;
 
     track.style.transform =
         `translateX(-${currentSlide * width}px)`;
 
-    document.querySelectorAll(".slider-thumb")
-    .forEach((thumb,i)=>{
-        thumb.classList.toggle("active",i===currentSlide);
+    document.querySelectorAll(".slider-thumb").forEach((thumb,i)=>{
+        thumb.classList.toggle("active", i === currentSlide);
     });
 }
 
-/* reload pas resize */
-window.addEventListener("resize",updateSlider);
+// ============================================
+// MODAL GALERI PREMIUM
+// ============================================
+function openGalleryModal(index){
+    currentGalleryIndex = index;
 
-/* panggil saat awal */
-document.addEventListener("DOMContentLoaded",()=>{
+    const thumbs = moments.map((img,i)=>`
+        <img src="${img}"
+        class="gallery-thumb ${i===index ? "active" : ""}"
+        onclick="jumpGallery(${i})">
+    `).join("");
+
+    const modal = document.createElement("div");
+    modal.className = "gallery-modal";
+
+    modal.innerHTML = `
+        <div class="gallery-modal-content">
+
+            <button class="gallery-modal-close" onclick="closeGalleryModal()">
+                &times;
+            </button>
+
+            <button class="gallery-modal-nav gallery-modal-prev" onclick="prevGallery()">
+                &#10094;
+            </button>
+
+            <button class="gallery-modal-nav gallery-modal-next" onclick="nextGallery()">
+                &#10095;
+            </button>
+
+            <div class="gallery-modal-counter">
+                ${index + 1} / ${moments.length}
+            </div>
+
+            <img id="galleryMainImage" src="${moments[index]}">
+
+            <div class="gallery-thumbs">
+                ${thumbs}
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document.addEventListener("keydown", galleryKeyNav);
+}
+
+function closeGalleryModal(){
+    document.querySelector(".gallery-modal")?.remove();
+    document.removeEventListener("keydown", galleryKeyNav);
+}
+
+function prevGallery(){
+    currentGalleryIndex--;
+
+    if(currentGalleryIndex < 0){
+        currentGalleryIndex = moments.length - 1;
+    }
+
+    updateGalleryModal();
+}
+
+function nextGallery(){
+    currentGalleryIndex++;
+
+    if(currentGalleryIndex >= moments.length){
+        currentGalleryIndex = 0;
+    }
+
+    updateGalleryModal();
+}
+
+function jumpGallery(index){
+    currentGalleryIndex = index;
+    updateGalleryModal();
+}
+
+function updateGalleryModal(){
+    const img = document.getElementById("galleryMainImage");
+    const counter = document.querySelector(".gallery-modal-counter");
+
+    if(!img) return;
+
+    img.src = moments[currentGalleryIndex];
+    counter.innerText =
+        `${currentGalleryIndex + 1} / ${moments.length}`;
+
+    document.querySelectorAll(".gallery-thumb").forEach((thumb,i)=>{
+        thumb.classList.toggle("active", i === currentGalleryIndex);
+    });
+}
+
+function galleryKeyNav(e){
+    if(e.key === "Escape") closeGalleryModal();
+    if(e.key === "ArrowLeft") prevGallery();
+    if(e.key === "ArrowRight") nextGallery();
+}
+
+// ============================================
+// INIT
+// ============================================
+document.addEventListener("DOMContentLoaded", ()=>{
+
+    loadStudents();
+    loadMomenGrid();
     loadSlider();
+
+    window.addEventListener("resize", updateSlider);
+
 });
