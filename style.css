@@ -854,3 +854,23 @@ grid-template-columns:1fr;
 .momen-section p{
     color: #ffffff !important;
 }
+
+    /* =================================
+   FORCE BACKGROUND NYATU SEMUA
+================================= */
+
+.guru-section,
+.struktur-section,
+.siswa-section,
+.momen-section{
+    background:
+    linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.72)),
+    url('./images/backgroundkelas.jpg') center center / cover no-repeat fixed !important;
+
+    background-color: transparent !important;
+}
+
+/* Hilangin warna putih section galeri lama */
+.momen-section{
+    background-color: transparent !important;
+}
