@@ -378,8 +378,10 @@ function enableMainSliderDrag(){
 // ============================================
 // INIT
 // ============================================
-document.addEventListener("DOMContentLoaded", () => {
-  loadStudents();
-  loadMomenGrid();
-  loadSlider();
+document.addEventListener("DOMContentLoaded",()=>{
+    loadStudents();
+    loadMomenGrid();
+    loadSlider();
+
+    enableMainSliderDrag();
 });
