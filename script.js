@@ -278,3 +278,69 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMomenGrid();   // 2x5 momen grid
     loadSlider();      // Thumbnail slider
 });
+/* =========================================
+   SLIDER GALERI BAWAH
+   TAMBAHKAN KE script.js
+========================================= */
+
+let currentSlide = 0;
+
+/* load thumbnail */
+function loadSlider(){
+    const track = document.getElementById("momenSlider");
+    if(!track) return;
+
+    track.innerHTML = "";
+
+    moments.forEach((img,index)=>{
+        const thumb = document.createElement("img");
+        thumb.src = img;
+        thumb.className = "slider-thumb";
+        thumb.onclick = ()=> openGalleryModal(index);
+
+        if(index === 0){
+            thumb.classList.add("active");
+        }
+
+        track.appendChild(thumb);
+    });
+
+    updateSlider();
+}
+
+/* geser kiri kanan */
+function changeSlide(step){
+    const total = moments.length - 1;
+
+    currentSlide += step;
+
+    if(currentSlide < 0) currentSlide = 0;
+    if(currentSlide > total) currentSlide = total;
+
+    updateSlider();
+}
+
+/* update posisi */
+function updateSlider(){
+    const track = document.getElementById("momenSlider");
+    if(!track) return;
+
+    const width = window.innerWidth <= 480 ? 126 :
+                  window.innerWidth <= 768 ? 146 : 186;
+
+    track.style.transform =
+        `translateX(-${currentSlide * width}px)`;
+
+    document.querySelectorAll(".slider-thumb")
+    .forEach((thumb,i)=>{
+        thumb.classList.toggle("active",i===currentSlide);
+    });
+}
+
+/* reload pas resize */
+window.addEventListener("resize",updateSlider);
+
+/* panggil saat awal */
+document.addEventListener("DOMContentLoaded",()=>{
+    loadSlider();
+});
