@@ -30,7 +30,7 @@ body {
 }
 .hero-stats div {
     background: rgba(255,255,255,0.2); padding: 1rem 2rem; border-radius: 50px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
 }
 .hero-stats span { font-size: 2.5rem; font-weight: 700; color: #FFD700; display: block; }
 
@@ -53,7 +53,7 @@ body {
 
 .guru-card {
     background: rgba(255,255,255,.06);
-    backdrop-filter: blur(25px);
+    backdrop-filter: blur(10px);
     border-radius: 35px;
     padding: 4rem;
     display: grid;
@@ -149,7 +149,7 @@ body {
     cursor:pointer;
 
     background:rgba(255,255,255,.03);
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(8px);
 
     border:1px solid rgba(255,255,255,.10);
 
@@ -552,7 +552,7 @@ font-size:.78rem;
     color: white;
     font-size: 1.8rem;
     cursor: pointer;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
     transition: 0.25s ease;
 }
 
@@ -574,7 +574,7 @@ font-size:.78rem;
     color: white;
     font-size: 2rem;
     cursor: pointer;
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(8px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -610,7 +610,7 @@ font-size:.78rem;
     color: white;
     font-size: 0.95rem;
     font-weight: 600;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
     letter-spacing: .5px;
 }
 
@@ -740,7 +740,7 @@ font-size:.78rem;
 /* CARD */
 .struktur-card{
     background:rgba(255,255,255,.10);
-    backdrop-filter:blur(16px);
+    backdrop-filter:blur(10px);
     border:1px solid rgba(255,255,255,.15);
     border-radius:28px;
     padding:1.2rem;
