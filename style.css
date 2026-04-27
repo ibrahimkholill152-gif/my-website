@@ -44,25 +44,6 @@ body {
 /* Guru */
 /* GURU SECTION - BACKGROUND FOTO */
 /* GURU - FIXED BACKGROUND (STUCK) */
-.guru-section {
-    padding: 10rem 0;
-    background: 
-        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-        url('./images/Momen3.jpeg') center/cover **fixed** no-repeat;
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-/* Parallax Effect */
-.guru-section {
-    background-attachment: fixed;  /* STUCK saat scroll */
-    background-position: center;
-    background-size: cover;
-}
-
 /* Glass Card */
 .guru-container {
     position: relative;
@@ -113,15 +94,7 @@ body {
 ========================================== */
 
 /* SECTION */
-.siswa-section{
-    padding: 8rem 0;
-    background:
-    linear-gradient(rgba(0,0,0,.68), rgba(0,0,0,.68)),
-    url('./images/momen6.jpeg') center/cover fixed no-repeat;
-    position: relative;
-    overflow: hidden;
-    min-height: 100vh;
-}
+
 
 /* Glow background kiri */
 .siswa-section::before{
@@ -336,7 +309,6 @@ font-size:.78rem;
 
 }
 /* Momen Slider - MANUAL ONLY */
-.momen-section { padding: 8rem 0; background: #f8f9ff; }
 .slider-container { max-width: 1000px; margin: 0 auto; position: relative; }
 .slider {
     overflow: hidden; border-radius: 25px; box-shadow: 0 30px 80px rgba(0,0,0,0.2);
@@ -845,4 +817,18 @@ font-size:.82rem;
 grid-template-columns:1fr;
 }
 
+}
+/* =====================================
+   SATU BACKGROUND UNTUK SEMUA SECTION
+===================================== */
+
+.guru-section,
+.struktur-section,
+.siswa-section,
+.momen-section{
+    background:
+    linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.72)),
+    url('./images/backgroundkelas.jpg') center center / cover fixed no-repeat !important;
+
+    position: relative;
 }
