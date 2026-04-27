@@ -832,3 +832,30 @@ grid-template-columns:1fr;
 
     position: relative;
 }
+
+/* ==================================
+   SEMUA JUDUL SECTION JADI PUTIH
+================================== */
+
+.guru-section .section-title,
+.struktur-section .section-title,
+.siswa-section .section-title,
+.momen-section .section-title{
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff !important;
+    text-shadow: 0 4px 15px rgba(0,0,0,.45);
+}
+
+/* Text isi juga putih */
+.guru-section h3,
+.guru-section p,
+.guru-section .guru-motto,
+.struktur-section h3,
+.struktur-section p,
+.siswa-section h3,
+.momen-section h3,
+.momen-section p{
+    color: #ffffff !important;
+}
