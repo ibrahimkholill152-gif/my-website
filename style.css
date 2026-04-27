@@ -452,3 +452,96 @@ img{
 }
 
 }
+/* =========================================
+   THUMBNAIL SLIDER BAWAH GALERI
+   TAMBAHKAN PALING BAWAH CSS
+========================================= */
+
+.slider-container{
+    margin-top:3rem;
+    position:relative;
+}
+
+.slider-wrapper{
+    overflow:hidden;
+    border-radius:24px;
+    padding:.5rem 0;
+}
+
+.slider-track{
+    display:flex;
+    gap:1rem;
+    transition:transform .45s ease;
+}
+
+.slider-thumb{
+    flex:0 0 170px;
+    height:110px;
+    object-fit:cover;
+    border-radius:18px;
+    cursor:pointer;
+    opacity:.65;
+    transition:.3s ease;
+    border:3px solid transparent;
+}
+
+.slider-thumb:hover{
+    opacity:1;
+    transform:translateY(-4px);
+}
+
+.slider-thumb.active{
+    opacity:1;
+    border-color:#667eea;
+    box-shadow:0 10px 25px rgba(102,126,234,.35);
+}
+
+/* tombol kiri kanan */
+.slider-nav{
+    display:flex;
+    justify-content:center;
+    gap:1rem;
+    margin-top:1.5rem;
+}
+
+.nav-btn{
+    width:56px;
+    height:56px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    color:#fff;
+    font-size:1.2rem;
+
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    transition:.25s ease;
+}
+
+.nav-btn:hover{
+    transform:scale(1.08);
+    background:rgba(255,255,255,.18);
+}
+
+@media(max-width:768px){
+
+.slider-thumb{
+    flex:0 0 130px;
+    height:85px;
+}
+
+.nav-btn{
+    width:48px;
+    height:48px;
+}
+
+}
+
+@media(max-width:480px){
+
+.slider-thumb{
+    flex:0 0 110px;
+    height:75px;
+}
+
+}
