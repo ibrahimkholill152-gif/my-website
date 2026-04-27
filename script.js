@@ -174,14 +174,8 @@ function updateSlider(){
 // ============================================
 // MODAL GALERI PREMIUM
 // ============================================
-function openGalleryModal(index){
+unction openGalleryModal(index){
     currentGalleryIndex = index;
-
-    const thumbs = moments.map((img,i)=>`
-        <img src="${img}"
-        class="gallery-thumb ${i===index ? "active" : ""}"
-        onclick="jumpGallery(${i})">
-    `).join("");
 
     const modal = document.createElement("div");
     modal.className = "gallery-modal";
@@ -189,79 +183,52 @@ function openGalleryModal(index){
     modal.innerHTML = `
         <div class="gallery-modal-content">
 
-            <button class="gallery-modal-close" onclick="closeGalleryModal()">
-                &times;
-            </button>
+            <button class="gallery-modal-close"
+            onclick="closeGalleryModal()">&times;</button>
 
-            <button class="gallery-modal-nav gallery-modal-prev" onclick="prevGallery()">
-                &#10094;
-            </button>
+            <button class="gallery-modal-nav gallery-modal-prev"
+            onclick="prevGallery()">&#10094;</button>
 
-            <button class="gallery-modal-nav gallery-modal-next" onclick="nextGallery()">
-                &#10095;
-            </button>
+            <button class="gallery-modal-nav gallery-modal-next"
+            onclick="nextGallery()">&#10095;</button>
 
-            <div class="gallery-modal-counter">
-                ${index + 1} / ${moments.length}
-            </div>
-
-            <img id="galleryMainImage" src="${moments[index]}">
-
-            <div class="gallery-thumbs">
-                ${thumbs}
-            </div>
+            <img id="galleryMainImage"
+            src="${moments[index]}">
 
         </div>
     `;
 
     document.body.appendChild(modal);
 
-    document.addEventListener("keydown", galleryKeyNav);
+    document.addEventListener("keydown",galleryKeyNav);
 }
 
 function closeGalleryModal(){
     document.querySelector(".gallery-modal")?.remove();
-    document.removeEventListener("keydown", galleryKeyNav);
+    document.removeEventListener("keydown",galleryKeyNav);
 }
 
 function prevGallery(){
     currentGalleryIndex--;
-
     if(currentGalleryIndex < 0){
         currentGalleryIndex = moments.length - 1;
     }
-
-    updateGalleryModal();
+    updateGallery();
 }
 
 function nextGallery(){
     currentGalleryIndex++;
-
     if(currentGalleryIndex >= moments.length){
         currentGalleryIndex = 0;
     }
-
-    updateGalleryModal();
+    updateGallery();
 }
 
-function jumpGallery(index){
-    currentGalleryIndex = index;
-    updateGalleryModal();
-}
-
-function updateGalleryModal(){
+function updateGallery(){
     const img = document.getElementById("galleryMainImage");
-    const counter = document.querySelector(".gallery-modal-counter");
-
-    if(!img) return;
-
-    img.src = moments[currentGalleryIndex];
-    counter.innerText =
-        `${currentGalleryIndex + 1} / ${moments.length}`;
-
-    document.querySelectorAll(".gallery-thumb").forEach((thumb,i)=>{
-        thumb.classList.toggle("active", i === currentGalleryIndex);
-    });
+    if(img){
+        img.src = moments[currentGalleryIndex];
+    }
 }
 
 function galleryKeyNav(e){
@@ -273,12 +240,8 @@ function galleryKeyNav(e){
 // ============================================
 // INIT
 // ============================================
-document.addEventListener("DOMContentLoaded", ()=>{
-
+document.addEventListener("DOMContentLoaded",()=>{
     loadStudents();
     loadMomenGrid();
     loadSlider();
-
-    window.addEventListener("resize", updateSlider);
-
 });
