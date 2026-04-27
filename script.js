@@ -222,6 +222,7 @@ function openGalleryModal(index) {
   `;
 
   document.body.appendChild(modal);
+    enableThumbScroll();
 
   enableDrag(document.getElementById("galleryThumbs"));
 
@@ -283,6 +284,53 @@ function keyGallery(e) {
   if (e.key === "Escape") closeGalleryModal();
   if (e.key === "ArrowLeft") prevGallery();
   if (e.key === "ArrowRight") nextGallery();
+}
+
+function enableThumbScroll(){
+
+    const slider = document.getElementById("galleryThumbs");
+    if(!slider) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener("mousedown",(e)=>{
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener("mouseleave",()=>{
+        isDown = false;
+    });
+
+    slider.addEventListener("mouseup",()=>{
+        isDown = false;
+    });
+
+    slider.addEventListener("mousemove",(e)=>{
+        if(!isDown) return;
+        e.preventDefault();
+
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+
+        slider.scrollLeft = scrollLeft - walk;
+    });
+
+    // HP TOUCH
+    slider.addEventListener("touchstart",(e)=>{
+        startX = e.touches[0].pageX;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener("touchmove",(e)=>{
+        const x = e.touches[0].pageX;
+        const walk = (x - startX) * 2;
+
+        slider.scrollLeft = scrollLeft - walk;
+    });
 }
 
 // ============================================
