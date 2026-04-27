@@ -186,9 +186,20 @@ function enableDragSlider(track){
 // ============================================
 // MODAL GALERI
 // ============================================
-function openGalleryModal(index){
+/* =====================================
+   BIKIN THUMBNAIL BAWAH BISA DIGESER
+   GANTI function openGalleryModal()
+   + tambahin drag JS ini
+===================================== */
 
+function openGalleryModal(index){
     currentGalleryIndex = index;
+
+    const thumbsHTML = moments.map((img,i)=>`
+        <img src="${img}"
+             class="gallery-thumb ${i===index?'active':''}"
+             onclick="jumpGallery(${i})">
+    `).join('');
 
     const modal = document.createElement("div");
     modal.className = "gallery-modal";
@@ -197,71 +208,79 @@ function openGalleryModal(index){
         <div class="gallery-modal-content">
 
             <button class="gallery-modal-close"
-            onclick="closeGalleryModal()">&times;</button>
+            onclick="closeGalleryModal()">✕</button>
 
             <button class="gallery-modal-nav gallery-modal-prev"
-            onclick="prevGallery()">&#10094;</button>
+            onclick="prevGallery()">❮</button>
 
             <button class="gallery-modal-nav gallery-modal-next"
-            onclick="nextGallery()">&#10095;</button>
+            onclick="nextGallery()">❯</button>
 
             <img id="galleryMainImage"
             src="${moments[index]}">
+
+            <div class="gallery-thumbs" id="galleryThumbs">
+                ${thumbsHTML}
+            </div>
 
         </div>
     `;
 
     document.body.appendChild(modal);
 
-    document.addEventListener("keydown", galleryKeyNav);
+    enableThumbDrag();   // penting
 }
 
-function closeGalleryModal(){
-    document.querySelector(".gallery-modal")?.remove();
-    document.removeEventListener("keydown", galleryKeyNav);
+/* =====================================
+   DRAG THUMBNAIL KANAN KIRI
+===================================== */
+function enableThumbDrag(){
+
+    const slider = document.getElementById("galleryThumbs");
+    if(!slider) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener("mousedown",(e)=>{
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener("mouseleave",()=>{
+        isDown = false;
+    });
+
+    slider.addEventListener("mouseup",()=>{
+        isDown = false;
+    });
+
+    slider.addEventListener("mousemove",(e)=>{
+        if(!isDown) return;
+
+        e.preventDefault();
+
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+
+        slider.scrollLeft = scrollLeft - walk;
+    });
+
+    /* TOUCH HP */
+    let touchStart = 0;
+    let touchScroll = 0;
+
+    slider.addEventListener("touchstart",(e)=>{
+        touchStart = e.touches[0].pageX;
+        touchScroll = slider.scrollLeft;
+    });
+
+    slider.addEventListener("touchmove",(e)=>{
+        const move = e.touches[0].pageX;
+        const walk = (move - touchStart) * 2;
+
+        slider.scrollLeft = touchScroll - walk;
+    });
 }
-
-function prevGallery(){
-    currentGalleryIndex--;
-
-    if(currentGalleryIndex < 0){
-        currentGalleryIndex = moments.length - 1;
-    }
-
-    updateGallery();
-}
-
-function nextGallery(){
-    currentGalleryIndex++;
-
-    if(currentGalleryIndex >= moments.length){
-        currentGalleryIndex = 0;
-    }
-
-    updateGallery();
-}
-
-function updateGallery(){
-    const img = document.getElementById("galleryMainImage");
-
-    if(img){
-        img.src = moments[currentGalleryIndex];
-    }
-}
-
-function galleryKeyNav(e){
-    if(e.key === "Escape") closeGalleryModal();
-    if(e.key === "ArrowLeft") prevGallery();
-    if(e.key === "ArrowRight") nextGallery();
-}
-
-// ============================================
-// INIT
-// ============================================
-document.addEventListener("DOMContentLoaded",()=>{
-
-    loadStudents();
-    loadMomenGrid();
-    loadSlider();
-
-});
