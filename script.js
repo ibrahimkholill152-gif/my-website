@@ -41,7 +41,7 @@ const students = [
 // ============================================
 // ================= DATA MOMEN =================
 const moments = [];
-for (let i = 1; i <= 49; i++) {
+for (let i = 1; i <= 67; i++) {
   moments.push(`./images/Momen${i}.jpeg`);
 }
 
