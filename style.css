@@ -545,3 +545,72 @@ img{
 }
 
 }
+/* =====================================
+   THUMBNAIL BAWAH BISA DIGESER KANAN KIRI
+   Tambahin / ganti CSS lama
+===================================== */
+
+.gallery-thumbs{
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 92%;
+    max-width: 1400px;
+
+    display: flex;
+    gap: 14px;
+
+    overflow-x: auto;      /* penting */
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    padding: 10px 8px 14px;
+
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    cursor: grab;
+}
+
+.gallery-thumbs::-webkit-scrollbar{
+    display:none;
+}
+
+.gallery-thumbs:active{
+    cursor: grabbing;
+}
+
+.gallery-thumb{
+    flex: 0 0 auto;       /* biar ga gepeng */
+    width: 160px;
+    height: 95px;
+    object-fit: cover;
+    border-radius: 18px;
+
+    opacity: .55;
+    transition: .25s ease;
+    border: 2px solid transparent;
+}
+
+.gallery-thumb:hover,
+.gallery-thumb.active{
+    opacity: 1;
+    transform: scale(1.04);
+    border-color: #fff;
+}
+
+/* HP */
+@media(max-width:768px){
+
+.gallery-thumb{
+    width: 120px;
+    height: 75px;
+}
+
+.gallery-thumbs{
+    gap:10px;
+    bottom:15px;
+}
+
+}
