@@ -874,3 +874,49 @@ grid-template-columns:1fr;
 .momen-section{
     background-color: transparent !important;
 }
+
+/* =====================================
+   BACKGROUND SATU FOTO FULL OVERRIDE
+===================================== */
+
+html, body{
+    background:#000;
+}
+
+/* semua section utama */
+.guru-section,
+.struktur-section,
+.siswa-section,
+.momen-section{
+    background: transparent !important;
+    background-image: none !important;
+}
+
+/* kasih background lewat pseudo layer */
+.guru-section::before,
+.struktur-section::before,
+.siswa-section::before,
+.momen-section::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    z-index:0;
+
+    background:
+    linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.72)),
+    url('./images/backgroundkelas.jpg') center center / cover no-repeat fixed;
+
+}
+
+/* isi section di atas background */
+.guru-container,
+.siswa-container,
+.container,
+.struktur-grid,
+.guru-card,
+.siswa-grid,
+.momen-grid,
+.slider-container{
+    position:relative;
+    z-index:2;
+}
