@@ -277,25 +277,81 @@ img{
 }
 
 /* =========================================
-   GALERI FOTO
+   GALERI PINTEREST / MASONRY STYLE
+   GANTI CSS momen-grid lama pake ini
 ========================================= */
-.momen-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:1rem;
+
+.momen-section{
+    padding:7rem 0;
 }
 
+/* GRID PINTEREST */
+.momen-grid{
+    column-count:4;
+    column-gap:1rem;
+}
+
+/* ITEM FOTO */
 .momen-photo{
     width:100%;
-    aspect-ratio:1/1;
-    object-fit:cover;
-    border-radius:20px;
+    margin-bottom:1rem;
+    border-radius:22px;
+    overflow:hidden;
     cursor:pointer;
-    transition:.3s ease;
+    break-inside:avoid;
+    display:block;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.20);
+    transition:.35s ease;
 }
 
+/* FOTO */
+.momen-photo img{
+    width:100%;
+    display:block;
+    border-radius:22px;
+    object-fit:cover;
+}
+
+/* HOVER */
 .momen-photo:hover{
-    transform:scale(1.03);
+    transform:translateY(-6px) scale(1.02);
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+}
+
+/* OPTIONAL SIZE RANDOM */
+.momen-photo.tall img{
+    aspect-ratio:3/4;
+}
+
+.momen-photo.square img{
+    aspect-ratio:1/1;
+}
+
+.momen-photo.wide img{
+    aspect-ratio:16/9;
+}
+
+/* TABLET */
+@media(max-width:992px){
+.momen-grid{
+    column-count:3;
+}
+}
+
+/* HP */
+@media(max-width:768px){
+.momen-grid{
+    column-count:2;
+    column-gap:.8rem;
+}
+}
+
+/* HP KECIL */
+@media(max-width:480px){
+.momen-grid{
+    column-count:1;
+}
 }
 
 /* =========================================
