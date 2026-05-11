@@ -463,12 +463,11 @@ function initStrukturEffect(){
 
             document.body.appendChild(modal);
         });
-
-        /* =========================================
+/* =========================================
    MODAL STRUKTUR
 ========================================= */
 
-function openStrukturModal(item){
+function openStrukturModal(photo,name,role){
 
     const modal = document.createElement("div");
 
@@ -482,32 +481,15 @@ function openStrukturModal(item){
             ✕
             </button>
 
-            <img src="${item.photo}">
+            <img src="${photo}">
 
-            <div style="
-                position:absolute;
-                bottom:20px;
-                left:50%;
-                transform:translateX(-50%);
-                text-align:center;
-                color:white;
-            ">
-                <h2 style="font-size:1.8rem;">
-                    ${item.name}
-                </h2>
-
-                <p style="
-                    opacity:.8;
-                    margin-top:.4rem;
-                ">
-                    ${item.role}
-                </p>
+            <div class="struktur-modal-info">
+                <h2>${name}</h2>
+                <p>${role}</p>
             </div>
 
         </div>
     `;
 
     document.body.appendChild(modal);
-}
-    });
 }
