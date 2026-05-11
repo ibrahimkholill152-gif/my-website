@@ -255,6 +255,41 @@ img{
     align-items:center;
     z-index:2;
 }
+.siswa-card{
+    position:relative;
+    overflow:hidden;
+    transform-style:preserve-3d;
+    transition:
+        transform .15s ease,
+        box-shadow .25s ease;
+}
+
+/* Glow */
+.siswa-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:
+    radial-gradient(
+        circle at var(--x) var(--y),
+        rgba(255,255,255,.25),
+        transparent 40%
+    );
+    opacity:0;
+    transition:.25s ease;
+    z-index:1;
+}
+
+.siswa-card:hover::before{
+    opacity:1;
+}
+
+/* Isi card */
+.siswa-photo,
+.siswa-name{
+    position:relative;
+    z-index:2;
+}
 
 .siswa-name{
     position:absolute;
@@ -638,38 +673,4 @@ img{
 }
 
 }
-.siswa-card{
-    position:relative;
-    overflow:hidden;
-    transform-style:preserve-3d;
-    transition:
-        transform .15s ease,
-        box-shadow .25s ease;
-}
 
-/* Glow */
-.siswa-card::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:
-    radial-gradient(
-        circle at var(--x) var(--y),
-        rgba(255,255,255,.25),
-        transparent 40%
-    );
-    opacity:0;
-    transition:.25s ease;
-    z-index:1;
-}
-
-.siswa-card:hover::before{
-    opacity:1;
-}
-
-/* Isi card */
-.siswa-photo,
-.siswa-name{
-    position:relative;
-    z-index:2;
-}
