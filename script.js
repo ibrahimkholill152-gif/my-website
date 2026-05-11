@@ -463,33 +463,7 @@ function initStrukturEffect(){
 
             document.body.appendChild(modal);
         });
-/* =========================================
-   MODAL STRUKTUR
-========================================= */
 
-function openStrukturModal(photo,name,role){
-
-    const modal = document.createElement("div");
-
-    modal.className = "gallery-modal";
-
-    modal.innerHTML = `
-        <div class="gallery-modal-content">
-
-            <button class="gallery-modal-close"
-            onclick="this.closest('.gallery-modal').remove()">
-            ✕
-            </button>
-
-            <img src="${photo}">
-
-            <div class="struktur-modal-info">
-                <h2>${name}</h2>
-                <p>${role}</p>
-            </div>
-
-        </div>
-    `;
 
     document.body.appendChild(modal);
 }
