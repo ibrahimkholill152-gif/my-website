@@ -386,4 +386,83 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadStudents();
     loadMomenGrid();
     loadSlider();
+
+    enableMainSliderDrag();
+
+    initStudentHoverEffect();
+    initStrukturEffect();
+
 });
+/* =========================================
+   STRUKTUR HOVER EFFECT
+========================================= */
+
+function initStrukturEffect(){
+
+    const cards = document.querySelectorAll(".struktur-card");
+
+    cards.forEach(card=>{
+
+        card.addEventListener("mousemove",(e)=>{
+
+            const rect = card.getBoundingClientRect();
+
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / 18);
+            const rotateY = ((centerX - x) / 18);
+
+            card.style.transform = `
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                scale(1.04)
+            `;
+
+            card.style.boxShadow =
+                "0 20px 40px rgba(0,0,0,.35)";
+
+            card.style.setProperty("--x",`${x}px`);
+            card.style.setProperty("--y",`${y}px`);
+        });
+
+        card.addEventListener("mouseleave",()=>{
+
+            card.style.transform = `
+                rotateX(0deg)
+                rotateY(0deg)
+                scale(1)
+            `;
+
+            card.style.boxShadow =
+                "0 10px 25px rgba(0,0,0,.18)";
+        });
+
+        /* buka foto */
+        card.addEventListener("click",()=>{
+
+            const img = card.querySelector("img").src;
+
+            const modal = document.createElement("div");
+            modal.className = "gallery-modal";
+
+            modal.innerHTML = `
+                <div class="gallery-modal-content">
+
+                    <button class="gallery-modal-close"
+                    onclick="this.closest('.gallery-modal').remove()">
+                    ✕
+                    </button>
+
+                    <img src="${img}">
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+        });
+
+    });
+}
