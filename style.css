@@ -35,22 +35,29 @@ img{
 ========================================= */
 .hero{
     min-height:100vh;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     text-align:center;
 
     background:
     linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
-    url('./images/WhatsApp_Image_2026-04-26_at_9.45.03_AM_upscaled (1).jpeg') center/cover no-repeat;
+    url('./images/WhatsApp_Image_2026-04-26_at_9.45.03_AM_upscaled (1).jpeg')
+    center/cover no-repeat;
 }
 
 .hero-overlay{
-    background:rgba(255,255,255,.05);
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:28px;
     padding:3rem 2rem;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(10px);
 }
 
 .hero-title{
@@ -59,67 +66,85 @@ img{
 }
 
 .hero-subtitle{
-    margin-top:.5rem;
-    font-size:1.2rem;
+    margin-top:.6rem;
     color:#ddd;
+    font-size:1.15rem;
 }
 
 .hero-stats{
     margin-top:2rem;
+
     display:flex;
-    gap:1rem;
     justify-content:center;
+    gap:1rem;
     flex-wrap:wrap;
 }
 
 .hero-stats div{
-    background:rgba(255,255,255,.08);
     padding:1rem 1.5rem;
-    border-radius:18px;
+
     min-width:130px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.08);
 }
 
 .hero-stats span{
     display:block;
+
     font-size:2rem;
     font-weight:700;
+
     color:#FFD700;
 }
 
 /* =========================================
-   BACKGROUND SEMUA SECTION BAWAH
+   BACKGROUND SECTION
 ========================================= */
 .guru-section,
 .struktur-section,
 .siswa-section,
 .momen-section{
-    padding:7rem 0;
     position:relative;
+
+    padding:7rem 0;
 
     background:
     linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.72)),
-    url('./images/Momen1000.jpeg') center/cover fixed no-repeat;
+    url('./images/Momen1000.jpeg')
+    center/cover fixed no-repeat;
 }
 
 /* =========================================
-   JUDUL
+   TITLE
 ========================================= */
 .section-title{
-    text-align:center;
-    font-size:2.4rem;
     margin-bottom:3rem;
+
+    text-align:center;
+
+    font-size:2.5rem;
+    font-weight:700;
+
     color:#fff;
-    text-shadow:0 8px 20px rgba(0,0,0,.35);
+
+    text-shadow:
+    0 10px 25px rgba(0,0,0,.4);
 }
 
 /* =========================================
-   GLASS STYLE
+   GLASS
 ========================================= */
 .glass{
     background:rgba(255,255,255,.05);
+
     border:1px solid rgba(255,255,255,.08);
+
     backdrop-filter:blur(10px);
-    box-shadow:0 12px 28px rgba(0,0,0,.22);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.2);
 }
 
 /* =========================================
@@ -127,29 +152,38 @@ img{
 ========================================= */
 .guru-card{
     max-width:1150px;
+
     margin:auto;
+
     padding:2rem;
+
     border-radius:28px;
 
     display:grid;
     grid-template-columns:1fr 1fr;
+
     gap:2rem;
 
     background:rgba(255,255,255,.05);
+
     border:1px solid rgba(255,255,255,.08);
+
     backdrop-filter:blur(10px);
 }
 
 .guru-photo img{
     aspect-ratio:1/1;
+
     object-fit:cover;
-    border-radius:22px;
+
+    border-radius:24px;
 }
 
 .guru-info{
     display:flex;
     flex-direction:column;
     justify-content:center;
+
     gap:1rem;
 }
 
@@ -159,8 +193,8 @@ img{
 
 .guru-info p,
 .guru-motto{
-    color:#eee;
     line-height:1.8;
+    color:#eee;
 }
 
 /* =========================================
@@ -168,17 +202,24 @@ img{
 ========================================= */
 .struktur-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
     gap:1.2rem;
 }
 
 .struktur-card{
     padding:1rem;
+
     border-radius:24px;
+
     text-align:center;
 
     background:rgba(255,255,255,.05);
+
     border:1px solid rgba(255,255,255,.08);
+
     backdrop-filter:blur(10px);
 
     transition:.3s ease;
@@ -190,9 +231,16 @@ img{
 
 .struktur-photo{
     aspect-ratio:1/1;
+
     object-fit:cover;
+
     border-radius:18px;
+
     margin-bottom:1rem;
+}
+
+.struktur-card h3{
+    margin-bottom:.4rem;
 }
 
 .struktur-card p{
@@ -204,79 +252,57 @@ img{
 ========================================= */
 .siswa-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
     gap:1.2rem;
 }
 
 .siswa-card{
     position:relative;
+
     overflow:hidden;
+
     border-radius:24px;
+
     cursor:pointer;
 
     background:rgba(255,255,255,.05);
+
     border:1px solid rgba(255,255,255,.08);
+
     backdrop-filter:blur(10px);
 
-    transition:.3s ease;
-}
-
-.siswa-card:hover{
-    transform:translateY(-8px);
-}
-
-.siswa-photo{
-    aspect-ratio:1/1;
-    object-fit:cover;
-}
-
-.siswa-card::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to top,rgba(0,0,0,.85),transparent 60%);
-}
-
-.siswa-card::after{
-    content:attr(data-no);
-    position:absolute;
-    top:12px;
-    right:12px;
-
-    width:34px;
-    height:34px;
-    border-radius:50%;
-
-    background:#667eea;
-    color:#fff;
-    font-weight:700;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:2;
-}
-.siswa-card{
-    position:relative;
-    overflow:hidden;
     transform-style:preserve-3d;
+
     transition:
-        transform .15s ease,
-        box-shadow .25s ease;
+    transform .15s ease,
+    box-shadow .25s ease;
+
+    will-change:transform;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.18);
 }
 
-/* Glow */
 .siswa-card::before{
     content:'';
+
     position:absolute;
     inset:0;
+
     background:
     radial-gradient(
         circle at var(--x) var(--y),
-        rgba(255,255,255,.25),
-        transparent 40%
+        rgba(255,255,255,.18),
+        transparent 35%
     );
+
     opacity:0;
+
     transition:.25s ease;
+
     z-index:1;
 }
 
@@ -284,72 +310,130 @@ img{
     opacity:1;
 }
 
-/* Isi card */
-.siswa-photo,
-.siswa-name{
-    position:relative;
+.siswa-card::after{
+    content:attr(data-no);
+
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    width:34px;
+    height:34px;
+
+    border-radius:50%;
+
+    background:#667eea;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:.9rem;
+    font-weight:700;
+
+    z-index:5;
+}
+
+.siswa-photo{
+    aspect-ratio:1/1;
+
+    object-fit:cover;
+}
+
+.siswa-overlay{
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.85),
+        transparent 55%
+    );
+
     z-index:2;
 }
 
 .siswa-name{
     position:absolute;
-    bottom:0;
-    left:0;
+
+    bottom:18px;
+    left:50%;
+
+    transform:translateX(-50%);
+
     width:100%;
-    padding:1rem;
+
     text-align:center;
-    font-weight:700;
-    z-index:2;
+
+    padding:0 10px;
+
+    font-size:1rem;
+    font-weight:600;
+
+    z-index:3;
 }
 
 /* =========================================
-   GALERI PINTEREST
+   GALERI GRID 2x5
 ========================================= */
 .momen-grid{
-    column-count:4;
-    column-gap:1rem;
+    display:grid;
+
+    grid-template-columns:
+    repeat(5,1fr);
+
+    gap:1rem;
 }
 
 .momen-photo{
-    margin-bottom:1rem;
-    break-inside:avoid;
-    border-radius:20px;
     overflow:hidden;
+
+    border-radius:22px;
+
     cursor:pointer;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.22);
+
     transition:.3s ease;
-    box-shadow:0 12px 25px rgba(0,0,0,.22);
 }
 
 .momen-photo:hover{
-    transform:translateY(-6px) scale(1.02);
+    transform:
+    translateY(-6px)
+    scale(1.02);
 }
 
 .momen-photo img{
-    width:100%;
+    aspect-ratio:1/1;
+
     object-fit:cover;
 }
 
-.momen-photo.square img{
-    aspect-ratio:1/1;
-}
-
-.momen-photo.tall img{
-    aspect-ratio:3/4;
-}
-
-.momen-photo.wide img{
-    aspect-ratio:16/9;
+/* =========================================
+   SLIDER BAWAH
+========================================= */
+.slider-container{
+    margin-top:3rem;
 }
 
 #momenSlider{
     display:flex;
+
     gap:14px;
+
     overflow-x:auto;
     overflow-y:hidden;
-    scroll-behavior:smooth;
-    scrollbar-width:none;
-    cursor:grab;
+
     padding:10px 5px;
+
+    scroll-behavior:smooth;
+
+    scrollbar-width:none;
+
+    cursor:grab;
 }
 
 #momenSlider::-webkit-scrollbar{
@@ -359,25 +443,60 @@ img{
 #momenSlider:active{
     cursor:grabbing;
 }
+
+.slider-thumb{
+    flex:0 0 auto;
+
+    width:170px;
+    height:110px;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+    opacity:.65;
+
+    cursor:pointer;
+
+    transition:.25s ease;
+
+    border:2px solid transparent;
+}
+
+.slider-thumb:hover{
+    opacity:1;
+
+    transform:
+    translateY(-4px)
+    scale(1.03);
+}
+
 /* =========================================
-   MODAL PREMIUM
+   MODAL GALERI
 ========================================= */
 .gallery-modal{
     position:fixed;
     inset:0;
+
     background:rgba(0,0,0,.92);
+
     backdrop-filter:blur(14px);
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     z-index:9999;
 }
 
 .gallery-modal-content{
     position:relative;
+
     width:92%;
     max-width:1300px;
+
     height:88vh;
+
     display:flex;
     justify-content:center;
     align-items:center;
@@ -386,35 +505,52 @@ img{
 .gallery-modal img{
     max-width:100%;
     max-height:100%;
+
     object-fit:contain;
+
     border-radius:24px;
 }
 
 .gallery-modal-close{
     position:absolute;
+
     top:0;
     right:0;
+
     width:52px;
     height:52px;
+
     border:none;
     border-radius:50%;
-    background:rgba(255,255,255,.10);
+
+    background:rgba(255,255,255,.1);
+
     color:#fff;
-    font-size:1.8rem;
+
+    font-size:1.7rem;
+
     cursor:pointer;
 }
 
 .gallery-modal-nav{
     position:absolute;
+
     top:50%;
+
     transform:translateY(-50%);
+
     width:65px;
     height:65px;
+
     border:none;
     border-radius:50%;
-    background:rgba(255,255,255,.10);
+
+    background:rgba(255,255,255,.1);
+
     color:#fff;
+
     font-size:2rem;
+
     cursor:pointer;
 }
 
@@ -426,200 +562,22 @@ img{
     right:20px;
 }
 
-.gallery-modal-counter{
-    position:absolute;
-    top:20px;
-    left:20px;
-    padding:.7rem 1rem;
-    border-radius:999px;
-    background:rgba(255,255,255,.10);
-    font-size:.95rem;
-}
-
 /* =========================================
-   RESPONSIVE
+   THUMB MODAL
 ========================================= */
-@media(max-width:992px){
-
-.guru-card{
-    grid-template-columns:1fr;
-}
-
-.momen-grid{
-    column-count:3;
-}
-
-}
-
-@media(max-width:768px){
-
-.guru-section,
-.struktur-section,
-.siswa-section,
-.momen-section{
-    background-attachment:scroll;
-}
-
-.section-title{
-    font-size:2rem;
-}
-
-.siswa-grid,
-.struktur-grid{
-    grid-template-columns:repeat(2,1fr);
-}
-
-.momen-grid{
-    column-count:2;
-}
-
-.gallery-modal-nav{
-    width:52px;
-    height:52px;
-    font-size:1.4rem;
-}
-
-}
-
-@media(max-width:480px){
-
-.hero-overlay{
-    padding:2rem 1rem;
-}
-
-.hero-title{
-    font-size:2.5rem;
-}
-
-.hero-stats{
-    flex-direction:column;
-}
-
-.siswa-grid,
-.struktur-grid{
-    grid-template-columns:1fr;
-}
-
-.momen-grid{
-    column-count:1;
-}
-
-}
-/* =========================================
-   THUMBNAIL SLIDER BAWAH GALERI
-   TAMBAHKAN PALING BAWAH CSS
-========================================= */
-
-.slider-container{
-    margin-top:3rem;
-    position:relative;
-}
-
-.slider-wrapper{
-    overflow:hidden;
-    border-radius:24px;
-    padding:.5rem 0;
-}
-
-.slider-track{
-    display:flex;
-    gap:1rem;
-    transition:transform .45s ease;
-}
-
-.slider-thumb{
-    flex:0 0 170px;
-    height:110px;
-    object-fit:cover;
-    border-radius:18px;
-    cursor:pointer;
-    opacity:.65;
-    transition:.3s ease;
-    border:3px solid transparent;
-}
-
-.slider-thumb:hover{
-    opacity:1;
-    transform:translateY(-4px);
-}
-
-.slider-thumb.active{
-    opacity:1;
-    border-color:#667eea;
-    box-shadow:0 10px 25px rgba(102,126,234,.35);
-}
-
-/* tombol kiri kanan */
-.slider-nav{
-    display:flex;
-    justify-content:center;
-    gap:1rem;
-    margin-top:1.5rem;
-}
-
-.nav-btn{
-    width:56px;
-    height:56px;
-    border:none;
-    border-radius:50%;
-    cursor:pointer;
-    color:#fff;
-    font-size:1.2rem;
-
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(10px);
-    transition:.25s ease;
-}
-
-.nav-btn:hover{
-    transform:scale(1.08);
-    background:rgba(255,255,255,.18);
-}
-
-@media(max-width:768px){
-
-.slider-thumb{
-    flex:0 0 130px;
-    height:85px;
-}
-
-.nav-btn{
-    width:48px;
-    height:48px;
-}
-
-}
-
-@media(max-width:480px){
-
-.slider-thumb{
-    flex:0 0 auto;
-    width:170px;
-    height:100px;
-    object-fit:cover;
-    border-radius:18px;
-    cursor:pointer;
-    transition:.25s ease;
-}
-
-.slider-thumb:hover{
-    transform:scale(1.05);
-}
-/* =====================================
-   THUMBNAIL BAWAH BISA DIGESER KANAN KIRI
-   Tambahin / ganti CSS lama
-===================================== */
-
 .gallery-thumbs{
     position:absolute;
+
     bottom:-90px;
     left:50%;
+
     transform:translateX(-50%);
-    
+
     width:92%;
     max-width:1300px;
 
     display:flex;
+
     gap:14px;
 
     overflow-x:auto;
@@ -627,8 +585,9 @@ img{
 
     padding:10px 5px 18px;
 
-    scroll-behavior:smooth;
     scrollbar-width:none;
+
+    scroll-behavior:smooth;
 
     cursor:grab;
 }
@@ -643,34 +602,108 @@ img{
 
 .gallery-thumb{
     flex:0 0 auto;
+
     width:150px;
     height:90px;
+
     object-fit:cover;
+
     border-radius:18px;
-    cursor:pointer;
+
     opacity:.55;
+
+    cursor:pointer;
+
     transition:.25s ease;
+
+    border:2px solid transparent;
 }
 
 .gallery-thumb:hover,
 .gallery-thumb.active{
     opacity:1;
+
     transform:scale(1.05);
-    border:2px solid white;
+
+    border-color:#fff;
 }
 
-/* HP */
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media(max-width:992px){
+
+    .guru-card{
+        grid-template-columns:1fr;
+    }
+
+    .momen-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
 @media(max-width:768px){
 
-.gallery-thumb{
-    width: 120px;
-    height: 75px;
+    .guru-section,
+    .struktur-section,
+    .siswa-section,
+    .momen-section{
+        background-attachment:scroll;
+    }
+
+    .section-title{
+        font-size:2rem;
+    }
+
+    .siswa-grid,
+    .struktur-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .momen-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .slider-thumb{
+        width:130px;
+        height:85px;
+    }
+
+    .gallery-thumb{
+        width:120px;
+        height:75px;
+    }
+
+    .gallery-modal-nav{
+        width:52px;
+        height:52px;
+
+        font-size:1.4rem;
+    }
 }
 
-.gallery-thumbs{
-    gap:10px;
-    bottom:15px;
-}
+@media(max-width:480px){
 
-}
+    .hero-overlay{
+        padding:2rem 1rem;
+    }
 
+    .hero-title{
+        font-size:2.5rem;
+    }
+
+    .hero-stats{
+        flex-direction:column;
+    }
+
+    .siswa-grid,
+    .struktur-grid,
+    .momen-grid{
+        grid-template-columns:1fr;
+    }
+
+    .slider-thumb{
+        width:160px;
+        height:100px;
+    }
+}
