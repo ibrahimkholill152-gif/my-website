@@ -33,11 +33,11 @@ const students = [
     { name: "Wisnu Ardhi Winata", photo: "./images/Wisnu.jpg" },
     { name: "Zahratus Dzihni Sayidah", photo: "./images/Dzihni.jpg" }
 ];
-
 // ============================================
 // DATA MOMEN
 // ============================================
 const moments = [];
+
 for(let i = 1; i <= 89; i++){
     moments.push(`./images/Momen${i}.jpeg`);
 }
@@ -49,126 +49,94 @@ let currentGalleryIndex = 0;
 // ============================================
 function loadStudents(){
 
-    const grid = document.getElementById("siswaGrid");
+    const grid =
+    document.getElementById("siswaGrid");
+
     if(!grid) return;
 
     grid.innerHTML = "";
 
     students.forEach((student,index)=>{
 
-        const card = document.createElement("div");
+        const card =
+        document.createElement("div");
+
         card.className = "siswa-card";
         card.setAttribute("data-no", index + 1);
 
         card.innerHTML = `
-            <img src="${student.photo}" class="siswa-photo">
+            <img src="${student.photo}"
+            class="siswa-photo">
 
             <div class="siswa-overlay">
-                <h3 class="siswa-name">${student.name}</h3>
+                <h3 class="siswa-name">
+                    ${student.name}
+                </h3>
             </div>
         `;
 
-        // Hover Effect Ringan
-        card.addEventListener("mousemove",(e)=>{
+        addCardEffect(card);
 
-            const rect = card.getBoundingClientRect();
-
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const rotateY = (x - rect.width / 2) / 18;
-            const rotateX = -(y - rect.height / 2) / 18;
-
-            card.style.transform = `
-                perspective(1000px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                translateY(-8px)
-            `;
-
-            card.style.setProperty("--x",`${x}px`);
-            card.style.setProperty("--y",`${y}px`);
-        });
-
-        card.addEventListener("mouseleave",()=>{
-
-            card.style.transform = `
-                perspective(1000px)
-                rotateX(0)
-                rotateY(0)
-                translateY(0)
-            `;
-        });
-
-        card.onclick = ()=> openStudentModal(student);
+        card.onclick = ()=>
+        openImageModal(student.photo);
 
         grid.appendChild(card);
     });
 }
 
 // ============================================
-// MODAL SISWA
-// ============================================
-function openStudentModal(student){
-
-    const modal = document.createElement("div");
-    modal.className = "gallery-modal";
-
-    modal.innerHTML = `
-        <div class="gallery-modal-content">
-
-            <button class="gallery-modal-close"
-            onclick="closeGalleryModal()">✕</button>
-
-            <img src="${student.photo}">
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-}
-
-// ============================================
-// LOAD GALERI 2x5
+// LOAD GALERI GRID
 // ============================================
 function loadMomenGrid(){
 
-    const grid = document.getElementById("momenGrid");
+    const grid =
+    document.getElementById("momenGrid");
+
     if(!grid) return;
 
     grid.innerHTML = "";
 
     moments.slice(0,10).forEach((img,index)=>{
 
-        const item = document.createElement("div");
+        const item =
+        document.createElement("div");
+
         item.className = "momen-photo";
 
         item.innerHTML = `
-            <img src="${img}" 
-            onclick="openGalleryModal(${index})">
+            <img src="${img}">
         `;
+
+        item.onclick = ()=>
+        openGalleryModal(index);
 
         grid.appendChild(item);
     });
 }
 
 // ============================================
-// LOAD SLIDER BAWAH
+// LOAD SLIDER
 // ============================================
 function loadSlider(){
 
-    const slider = document.getElementById("momenSlider");
+    const slider =
+    document.getElementById("momenSlider");
+
     if(!slider) return;
 
     slider.innerHTML = "";
 
     moments.forEach((img,index)=>{
 
-        const thumb = document.createElement("img");
+        const thumb =
+        document.createElement("img");
 
         thumb.src = img;
+
         thumb.className = "slider-thumb";
 
-        thumb.onclick = ()=> openGalleryModal(index);
+        thumb.onclick = ()=>
+        openGalleryModal(index);
 
         slider.appendChild(thumb);
     });
@@ -177,7 +145,72 @@ function loadSlider(){
 }
 
 // ============================================
-// DRAG SCROLL UNIVERSAL
+// CARD EFFECT
+// ============================================
+function addCardEffect(card){
+
+    card.addEventListener("mousemove",(e)=>{
+
+        if(window.innerWidth < 768) return;
+
+        const rect =
+        card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateY =
+        (x - rect.width / 2) / 20;
+
+        const rotateX =
+        -(y - rect.height / 2) / 20;
+
+        card.style.transform = `
+            perspective(1000px)
+            rotateX(${rotateX}deg)
+            rotateY(${rotateY}deg)
+            translateY(-6px)
+        `;
+
+        card.style.setProperty("--x",`${x}px`);
+        card.style.setProperty("--y",`${y}px`);
+    });
+
+    card.addEventListener("mouseleave",()=>{
+
+        card.style.transform = `
+            perspective(1000px)
+            rotateX(0deg)
+            rotateY(0deg)
+            translateY(0)
+        `;
+    });
+}
+
+// ============================================
+// STRUKTUR EFFECT
+// ============================================
+function initStrukturEffect(){
+
+    const cards =
+    document.querySelectorAll(".struktur-card");
+
+    cards.forEach(card=>{
+
+        addCardEffect(card);
+
+        card.addEventListener("click",()=>{
+
+            const img =
+            card.querySelector("img").src;
+
+            openImageModal(img);
+        });
+    });
+}
+
+// ============================================
+// DRAG SCROLL
 // ============================================
 function enableDragScroll(element){
 
@@ -189,8 +222,11 @@ function enableDragScroll(element){
 
         isDown = true;
 
-        startX = e.pageX - element.offsetLeft;
-        scrollLeft = element.scrollLeft;
+        startX =
+        e.pageX - element.offsetLeft;
+
+        scrollLeft =
+        element.scrollLeft;
 
         element.style.cursor = "grabbing";
     });
@@ -213,31 +249,65 @@ function enableDragScroll(element){
 
         e.preventDefault();
 
-        const x = e.pageX - element.offsetLeft;
+        const x =
+        e.pageX - element.offsetLeft;
 
-        const walk = (x - startX) * 2;
+        const walk =
+        (x - startX) * 2;
 
-        element.scrollLeft = scrollLeft - walk;
+        element.scrollLeft =
+        scrollLeft - walk;
     });
 
-    // TOUCH HP
+    // TOUCH
     let touchStart = 0;
     let touchScroll = 0;
 
     element.addEventListener("touchstart",(e)=>{
 
-        touchStart = e.touches[0].pageX;
-        touchScroll = element.scrollLeft;
+        touchStart =
+        e.touches[0].pageX;
+
+        touchScroll =
+        element.scrollLeft;
     });
 
     element.addEventListener("touchmove",(e)=>{
 
-        const move = e.touches[0].pageX;
+        const move =
+        e.touches[0].pageX;
 
-        const walk = (move - touchStart) * 2;
+        const walk =
+        (move - touchStart) * 2;
 
-        element.scrollLeft = touchScroll - walk;
+        element.scrollLeft =
+        touchScroll - walk;
     });
+}
+
+// ============================================
+// IMAGE MODAL
+// ============================================
+function openImageModal(src){
+
+    const modal =
+    document.createElement("div");
+
+    modal.className = "gallery-modal";
+
+    modal.innerHTML = `
+        <div class="gallery-modal-content">
+
+            <button class="gallery-modal-close"
+            onclick="closeGalleryModal()">
+            ✕
+            </button>
+
+            <img src="${src}">
+        </div>
+    `;
+
+    document.body.appendChild(modal);
 }
 
 // ============================================
@@ -247,30 +317,41 @@ function openGalleryModal(index){
 
     currentGalleryIndex = index;
 
-    const thumbs = moments.map((img,i)=>`
+    const thumbs =
+    moments.map((img,i)=>`
 
         <img src="${img}"
-        class="gallery-thumb ${i===index ? 'active' : ''}"
+        class="gallery-thumb
+        ${i===index ? 'active' : ''}"
+
         onclick="jumpGallery(${i})">
 
-    `).join('');
+    `).join("");
 
-    const modal = document.createElement("div");
+    const modal =
+    document.createElement("div");
 
     modal.className = "gallery-modal";
 
     modal.innerHTML = `
-    
         <div class="gallery-modal-content">
 
             <button class="gallery-modal-close"
-            onclick="closeGalleryModal()">✕</button>
+            onclick="closeGalleryModal()">
+            ✕
+            </button>
 
-            <button class="gallery-modal-nav gallery-modal-prev"
-            onclick="prevGallery()">❮</button>
+            <button class="gallery-modal-nav
+            gallery-modal-prev"
+            onclick="prevGallery()">
+            ❮
+            </button>
 
-            <button class="gallery-modal-nav gallery-modal-next"
-            onclick="nextGallery()">❯</button>
+            <button class="gallery-modal-nav
+            gallery-modal-next"
+            onclick="nextGallery()">
+            ❯
+            </button>
 
             <img id="galleryMainImage"
             src="${moments[index]}">
@@ -283,17 +364,18 @@ function openGalleryModal(index){
             </div>
 
         </div>
-
     `;
 
     document.body.appendChild(modal);
 
-    const thumbsContainer =
-    document.getElementById("galleryThumbs");
+    enableDragScroll(
+        document.getElementById("galleryThumbs")
+    );
 
-    enableDragScroll(thumbsContainer);
-
-    document.addEventListener("keydown", keyGallery);
+    document.addEventListener(
+        "keydown",
+        keyGallery
+    );
 }
 
 // ============================================
@@ -301,20 +383,25 @@ function openGalleryModal(index){
 // ============================================
 function closeGalleryModal(){
 
-    document.querySelector(".gallery-modal")?.remove();
+    document.querySelector(".gallery-modal")
+    ?.remove();
 
-    document.removeEventListener("keydown", keyGallery);
+    document.removeEventListener(
+        "keydown",
+        keyGallery
+    );
 }
 
 // ============================================
-// NAVIGATION
+// NAVIGASI
 // ============================================
 function prevGallery(){
 
     currentGalleryIndex--;
 
     if(currentGalleryIndex < 0){
-        currentGalleryIndex = moments.length - 1;
+        currentGalleryIndex =
+        moments.length - 1;
     }
 
     updateGallery();
@@ -344,10 +431,13 @@ function jumpGallery(index){
 function updateGallery(){
 
     const img =
-    document.getElementById("galleryMainImage");
+    document.getElementById(
+        "galleryMainImage"
+    );
 
     if(img){
-        img.src = moments[currentGalleryIndex];
+        img.src =
+        moments[currentGalleryIndex];
     }
 
     document.querySelectorAll(".gallery-thumb")
@@ -381,89 +471,14 @@ function keyGallery(e){
 // ============================================
 // INIT
 // ============================================
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
 
-    loadStudents();
-    loadMomenGrid();
-    loadSlider();
+        loadStudents();
+        loadMomenGrid();
+        loadSlider();
+        initStrukturEffect();
 
-    enableMainSliderDrag();
-
-    initStudentHoverEffect();
-    initStrukturEffect();
-
-});
-/* =========================================
-   STRUKTUR HOVER EFFECT
-========================================= */
-
-function initStrukturEffect(){
-
-    const cards = document.querySelectorAll(".struktur-card");
-
-    cards.forEach(card=>{
-
-        card.addEventListener("mousemove",(e)=>{
-
-            const rect = card.getBoundingClientRect();
-
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = ((y - centerY) / 18);
-            const rotateY = ((centerX - x) / 18);
-
-            card.style.transform = `
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                scale(1.04)
-            `;
-
-            card.style.boxShadow =
-                "0 20px 40px rgba(0,0,0,.35)";
-
-            card.style.setProperty("--x",`${x}px`);
-            card.style.setProperty("--y",`${y}px`);
-        });
-
-        card.addEventListener("mouseleave",()=>{
-
-            card.style.transform = `
-                rotateX(0deg)
-                rotateY(0deg)
-                scale(1)
-            `;
-
-            card.style.boxShadow =
-                "0 10px 25px rgba(0,0,0,.18)";
-        });
-
-        /* buka foto */
-        card.addEventListener("click",()=>{
-
-            const img = card.querySelector("img").src;
-
-            const modal = document.createElement("div");
-            modal.className = "gallery-modal";
-
-            modal.innerHTML = `
-                <div class="gallery-modal-content">
-
-                    <button class="gallery-modal-close"
-                    onclick="this.closest('.gallery-modal').remove()">
-                    ✕
-                    </button>
-
-                    <img src="${img}">
-                </div>
-            `;
-
-            document.body.appendChild(modal);
-        });
-
-
-    document.body.appendChild(modal);
-}
+    }
+);
