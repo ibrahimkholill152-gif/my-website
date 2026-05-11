@@ -999,3 +999,31 @@ img{
 }
 
 }
+/* =========================================
+   MODAL INFO STRUKTUR
+========================================= */
+
+.struktur-modal-info{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+
+    text-align:center;
+    color:white;
+
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(10px);
+
+    padding:1rem 1.5rem;
+    border-radius:20px;
+}
+
+.struktur-modal-info h2{
+    font-size:1.6rem;
+    margin-bottom:.3rem;
+}
+
+.struktur-modal-info p{
+    opacity:.8;
+}
