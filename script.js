@@ -464,5 +464,50 @@ function initStrukturEffect(){
             document.body.appendChild(modal);
         });
 
+        /* =========================================
+   MODAL STRUKTUR
+========================================= */
+
+function openStrukturModal(item){
+
+    const modal = document.createElement("div");
+
+    modal.className = "gallery-modal";
+
+    modal.innerHTML = `
+        <div class="gallery-modal-content">
+
+            <button class="gallery-modal-close"
+            onclick="this.closest('.gallery-modal').remove()">
+            ✕
+            </button>
+
+            <img src="${item.photo}">
+
+            <div style="
+                position:absolute;
+                bottom:20px;
+                left:50%;
+                transform:translateX(-50%);
+                text-align:center;
+                color:white;
+            ">
+                <h2 style="font-size:1.8rem;">
+                    ${item.name}
+                </h2>
+
+                <p style="
+                    opacity:.8;
+                    margin-top:.4rem;
+                ">
+                    ${item.role}
+                </p>
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+}
     });
 }
