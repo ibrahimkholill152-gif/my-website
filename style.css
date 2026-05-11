@@ -943,5 +943,59 @@ img{
         width:78px;
         height:54px;
     }
+   /* =========================================
+   STRUKTUR PREMIUM EFFECT
+========================================= */
+
+.struktur-card{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+
+    transform-style:preserve-3d;
+
+    transition:
+        transform .15s ease,
+        box-shadow .25s ease;
+}
+
+/* glow effect */
+.struktur-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle at var(--x) var(--y),
+        rgba(255,255,255,.25),
+        transparent 40%
+    );
+
+    opacity:0;
+    transition:.25s ease;
+    z-index:1;
+}
+
+.struktur-card:hover::before{
+    opacity:1;
+}
+
+/* isi card */
+.struktur-photo,
+.struktur-card h3,
+.struktur-card p{
+    position:relative;
+    z-index:2;
+}
+
+/* foto zoom dikit */
+.struktur-photo{
+    transition:.35s ease;
+}
+
+.struktur-card:hover .struktur-photo{
+    transform:scale(1.05);
+}
 
 }
