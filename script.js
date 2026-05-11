@@ -35,14 +35,11 @@ const students = [
 ];
 
 // ============================================
-// FULL FIX SCRIPT.JS
-// Grid 2x5 + slider bawah bisa digeser +
-// modal galeri premium
+// DATA MOMEN
 // ============================================
-// ================= DATA MOMEN =================
 const moments = [];
-for (let i = 1; i <= 67; i++) {
-  moments.push(`./images/Momen${i}.jpeg`);
+for(let i = 1; i <= 67; i++){
+    moments.push(`./images/Momen${i}.jpeg`);
 }
 
 let currentGalleryIndex = 0;
@@ -50,347 +47,28 @@ let currentGalleryIndex = 0;
 // ============================================
 // LOAD SISWA
 // ============================================
-function loadStudents() {
-  const grid = document.getElementById("siswaGrid");
-  if (!grid) return;
+function loadStudents(){
 
-  grid.innerHTML = "";
+    const grid = document.getElementById("siswaGrid");
+    if(!grid) return;
 
-  students.forEach((student, index) => {
-    const card = document.createElement("div");
-    card.className = "siswa-card";
-    card.setAttribute("data-no", index + 1);
+    grid.innerHTML = "";
 
-    card.innerHTML = `
-      <img src="${student.photo}" class="siswa-photo">
-      <h3 class="siswa-name">${student.name}</h3>
-    `;
+    students.forEach((student,index)=>{
 
-    card.onclick = () => openStudentModal(student);
+        const card = document.createElement("div");
+        card.className = "siswa-card";
+        card.setAttribute("data-no", index + 1);
 
-    grid.appendChild(card);
-  });
-}
+        card.innerHTML = `
+            <img src="${student.photo}" class="siswa-photo">
 
-// ============================================
-// MODAL SISWA
-// ============================================
-function openStudentModal(student) {
-  const modal = document.createElement("div");
-  modal.className = "gallery-modal";
+            <div class="siswa-overlay">
+                <h3 class="siswa-name">${student.name}</h3>
+            </div>
+        `;
 
-  modal.innerHTML = `
-    <div class="gallery-modal-content">
-      <button class="gallery-modal-close" onclick="closeGalleryModal()">✕</button>
-      <img src="${student.photo}">
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-}
-
-// ============================================
-// LOAD GALERI GRID 2x5
-// ============================================
-function loadMomenGrid() {
-  const grid = document.getElementById("momenGrid");
-  if (!grid) return;
-
-  grid.innerHTML = "";
-
-  moments.slice(0, 10).forEach((img, index) => {
-    const item = document.createElement("div");
-    item.className = "momen-photo";
-
-    item.innerHTML = `
-      <img src="${img}" onclick="openGalleryModal(${index})">
-    `;
-
-    grid.appendChild(item);
-  });
-}
-
-// ============================================
-// LOAD SLIDER BAWAH
-// ============================================
-function loadSlider() {
-  const slider = document.getElementById("momenSlider");
-  if (!slider) return;
-
-  slider.innerHTML = "";
-
-  moments.forEach((img, index) => {
-    const thumb = document.createElement("img");
-
-    thumb.src = img;
-    thumb.className = "slider-thumb";
-
-    thumb.onclick = () => openGalleryModal(index);
-
-    slider.appendChild(thumb);
-  });
-
-  enableDrag(slider);
-}
-
-// ============================================
-// DRAG SCROLL
-// ============================================
-function enableDrag(slider) {
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-
-  slider.addEventListener("mousedown", (e) => {
-    isDown = true;
-    slider.classList.add("active-drag");
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-  });
-
-  slider.addEventListener("mouseleave", () => {
-    isDown = false;
-  });
-
-  slider.addEventListener("mouseup", () => {
-    isDown = false;
-  });
-
-  slider.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-
-    e.preventDefault();
-
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 2;
-
-    slider.scrollLeft = scrollLeft - walk;
-  });
-
-  // TOUCH HP
-  let touchStart = 0;
-  let touchScroll = 0;
-
-  slider.addEventListener("touchstart", (e) => {
-    touchStart = e.touches[0].pageX;
-    touchScroll = slider.scrollLeft;
-  });
-
-  slider.addEventListener("touchmove", (e) => {
-    const move = e.touches[0].pageX;
-    const walk = (move - touchStart) * 2;
-
-    slider.scrollLeft = touchScroll - walk;
-  });
-}
-
-// ============================================
-// OPEN MODAL GALERI
-// ============================================
-function openGalleryModal(index) {
-  currentGalleryIndex = index;
-
-  const thumbs = moments.map((img, i) => `
-    <img src="${img}" 
-         class="gallery-thumb ${i === index ? "active" : ""}"
-         onclick="jumpGallery(${i})">
-  `).join("");
-
-  const modal = document.createElement("div");
-  modal.className = "gallery-modal";
-
-  modal.innerHTML = `
-    <div class="gallery-modal-content">
-
-      <button class="gallery-modal-close"
-      onclick="closeGalleryModal()">✕</button>
-
-      <button class="gallery-modal-nav gallery-modal-prev"
-      onclick="prevGallery()">❮</button>
-
-      <button class="gallery-modal-nav gallery-modal-next"
-      onclick="nextGallery()">❯</button>
-
-      <img id="galleryMainImage"
-      src="${moments[index]}">
-
-      <div class="gallery-thumbs" id="galleryThumbs">
-        ${thumbs}
-      </div>
-
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-    enableThumbScroll();
-
-  enableDrag(document.getElementById("galleryThumbs"));
-
-  document.addEventListener("keydown", keyGallery);
-}
-
-// ============================================
-// CLOSE
-// ============================================
-function closeGalleryModal() {
-  document.querySelector(".gallery-modal")?.remove();
-  document.removeEventListener("keydown", keyGallery);
-}
-
-// ============================================
-// NAVIGASI
-// ============================================
-function prevGallery() {
-  currentGalleryIndex--;
-
-  if (currentGalleryIndex < 0) {
-    currentGalleryIndex = moments.length - 1;
-  }
-
-  updateGallery();
-}
-
-function nextGallery() {
-  currentGalleryIndex++;
-
-  if (currentGalleryIndex >= moments.length) {
-    currentGalleryIndex = 0;
-  }
-
-  updateGallery();
-}
-
-function jumpGallery(index) {
-  currentGalleryIndex = index;
-  updateGallery();
-}
-
-// ============================================
-// UPDATE MODAL
-// ============================================
-function updateGallery() {
-  const img = document.getElementById("galleryMainImage");
-  if (img) img.src = moments[currentGalleryIndex];
-
-  document.querySelectorAll(".gallery-thumb").forEach((thumb, i) => {
-    thumb.classList.toggle("active", i === currentGalleryIndex);
-  });
-}
-
-// ============================================
-// KEYBOARD
-// ============================================
-function keyGallery(e) {
-  if (e.key === "Escape") closeGalleryModal();
-  if (e.key === "ArrowLeft") prevGallery();
-  if (e.key === "ArrowRight") nextGallery();
-}
-
-function enableThumbScroll(){
-
-    const slider = document.getElementById("galleryThumbs");
-    if(!slider) return;
-
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    slider.addEventListener("mousedown",(e)=>{
-        isDown = true;
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
-
-    slider.addEventListener("mouseleave",()=>{
-        isDown = false;
-    });
-
-    slider.addEventListener("mouseup",()=>{
-        isDown = false;
-    });
-
-    slider.addEventListener("mousemove",(e)=>{
-        if(!isDown) return;
-        e.preventDefault();
-
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-
-        slider.scrollLeft = scrollLeft - walk;
-    });
-
-    // HP TOUCH
-    slider.addEventListener("touchstart",(e)=>{
-        startX = e.touches[0].pageX;
-        scrollLeft = slider.scrollLeft;
-    });
-
-    slider.addEventListener("touchmove",(e)=>{
-        const x = e.touches[0].pageX;
-        const walk = (x - startX) * 2;
-
-        slider.scrollLeft = scrollLeft - walk;
-    });
-}
-
-function enableMainSliderDrag(){
-
-    const slider = document.getElementById("momenSlider");
-    if(!slider) return;
-
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    slider.addEventListener("mousedown",(e)=>{
-        isDown = true;
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
-
-    slider.addEventListener("mouseleave",()=> isDown=false);
-    slider.addEventListener("mouseup",()=> isDown=false);
-
-    slider.addEventListener("mousemove",(e)=>{
-        if(!isDown) return;
-
-        e.preventDefault();
-
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-
-        slider.scrollLeft = scrollLeft - walk;
-    });
-
-    // TOUCH HP
-    slider.addEventListener("touchstart",(e)=>{
-        startX = e.touches[0].pageX;
-        scrollLeft = slider.scrollLeft;
-    });
-
-    slider.addEventListener("touchmove",(e)=>{
-        const x = e.touches[0].pageX;
-        const walk = (x - startX) * 2;
-
-        slider.scrollLeft = scrollLeft - walk;
-    });
-}
-// ============================================
-// INIT
-// ============================================
-document.addEventListener("DOMContentLoaded",()=>{
-    loadStudents();
-    loadMomenGrid();
-    loadSlider();
-
-    enableMainSliderDrag();
-});
-function initStudentHoverEffect(){
-
-    const cards = document.querySelectorAll(".siswa-card");
-
-    cards.forEach(card=>{
-
+        // Hover Effect Ringan
         card.addEventListener("mousemove",(e)=>{
 
             const rect = card.getBoundingClientRect();
@@ -398,37 +76,314 @@ function initStudentHoverEffect(){
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = ((y - centerY) / 18);
-            const rotateY = ((centerX - x) / 18);
+            const rotateY = (x - rect.width / 2) / 18;
+            const rotateX = -(y - rect.height / 2) / 18;
 
             card.style.transform = `
+                perspective(1000px)
                 rotateX(${rotateX}deg)
                 rotateY(${rotateY}deg)
-                scale(1.04)
+                translateY(-8px)
             `;
 
-            card.style.boxShadow = `
-                0 20px 40px rgba(0,0,0,.35)
-            `;
-
-            card.style.setProperty("--x", `${x}px`);
-            card.style.setProperty("--y", `${y}px`);
+            card.style.setProperty("--x",`${x}px`);
+            card.style.setProperty("--y",`${y}px`);
         });
 
         card.addEventListener("mouseleave",()=>{
 
             card.style.transform = `
-                rotateX(0deg)
-                rotateY(0deg)
-                scale(1)
+                perspective(1000px)
+                rotateX(0)
+                rotateY(0)
+                translateY(0)
             `;
-
-            card.style.boxShadow =
-                "0 10px 25px rgba(0,0,0,.18)";
         });
 
+        card.onclick = ()=> openStudentModal(student);
+
+        grid.appendChild(card);
     });
 }
+
+// ============================================
+// MODAL SISWA
+// ============================================
+function openStudentModal(student){
+
+    const modal = document.createElement("div");
+    modal.className = "gallery-modal";
+
+    modal.innerHTML = `
+        <div class="gallery-modal-content">
+
+            <button class="gallery-modal-close"
+            onclick="closeGalleryModal()">✕</button>
+
+            <img src="${student.photo}">
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+}
+
+// ============================================
+// LOAD GALERI 2x5
+// ============================================
+function loadMomenGrid(){
+
+    const grid = document.getElementById("momenGrid");
+    if(!grid) return;
+
+    grid.innerHTML = "";
+
+    moments.slice(0,10).forEach((img,index)=>{
+
+        const item = document.createElement("div");
+        item.className = "momen-photo";
+
+        item.innerHTML = `
+            <img src="${img}" 
+            onclick="openGalleryModal(${index})">
+        `;
+
+        grid.appendChild(item);
+    });
+}
+
+// ============================================
+// LOAD SLIDER BAWAH
+// ============================================
+function loadSlider(){
+
+    const slider = document.getElementById("momenSlider");
+    if(!slider) return;
+
+    slider.innerHTML = "";
+
+    moments.forEach((img,index)=>{
+
+        const thumb = document.createElement("img");
+
+        thumb.src = img;
+        thumb.className = "slider-thumb";
+
+        thumb.onclick = ()=> openGalleryModal(index);
+
+        slider.appendChild(thumb);
+    });
+
+    enableDragScroll(slider);
+}
+
+// ============================================
+// DRAG SCROLL UNIVERSAL
+// ============================================
+function enableDragScroll(element){
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    element.addEventListener("mousedown",(e)=>{
+
+        isDown = true;
+
+        startX = e.pageX - element.offsetLeft;
+        scrollLeft = element.scrollLeft;
+
+        element.style.cursor = "grabbing";
+    });
+
+    element.addEventListener("mouseleave",()=>{
+
+        isDown = false;
+        element.style.cursor = "grab";
+    });
+
+    element.addEventListener("mouseup",()=>{
+
+        isDown = false;
+        element.style.cursor = "grab";
+    });
+
+    element.addEventListener("mousemove",(e)=>{
+
+        if(!isDown) return;
+
+        e.preventDefault();
+
+        const x = e.pageX - element.offsetLeft;
+
+        const walk = (x - startX) * 2;
+
+        element.scrollLeft = scrollLeft - walk;
+    });
+
+    // TOUCH HP
+    let touchStart = 0;
+    let touchScroll = 0;
+
+    element.addEventListener("touchstart",(e)=>{
+
+        touchStart = e.touches[0].pageX;
+        touchScroll = element.scrollLeft;
+    });
+
+    element.addEventListener("touchmove",(e)=>{
+
+        const move = e.touches[0].pageX;
+
+        const walk = (move - touchStart) * 2;
+
+        element.scrollLeft = touchScroll - walk;
+    });
+}
+
+// ============================================
+// OPEN GALERI
+// ============================================
+function openGalleryModal(index){
+
+    currentGalleryIndex = index;
+
+    const thumbs = moments.map((img,i)=>`
+
+        <img src="${img}"
+        class="gallery-thumb ${i===index ? 'active' : ''}"
+        onclick="jumpGallery(${i})">
+
+    `).join('');
+
+    const modal = document.createElement("div");
+
+    modal.className = "gallery-modal";
+
+    modal.innerHTML = `
+    
+        <div class="gallery-modal-content">
+
+            <button class="gallery-modal-close"
+            onclick="closeGalleryModal()">✕</button>
+
+            <button class="gallery-modal-nav gallery-modal-prev"
+            onclick="prevGallery()">❮</button>
+
+            <button class="gallery-modal-nav gallery-modal-next"
+            onclick="nextGallery()">❯</button>
+
+            <img id="galleryMainImage"
+            src="${moments[index]}">
+
+            <div class="gallery-thumbs"
+            id="galleryThumbs">
+
+                ${thumbs}
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(modal);
+
+    const thumbsContainer =
+    document.getElementById("galleryThumbs");
+
+    enableDragScroll(thumbsContainer);
+
+    document.addEventListener("keydown", keyGallery);
+}
+
+// ============================================
+// CLOSE
+// ============================================
+function closeGalleryModal(){
+
+    document.querySelector(".gallery-modal")?.remove();
+
+    document.removeEventListener("keydown", keyGallery);
+}
+
+// ============================================
+// NAVIGATION
+// ============================================
+function prevGallery(){
+
+    currentGalleryIndex--;
+
+    if(currentGalleryIndex < 0){
+        currentGalleryIndex = moments.length - 1;
+    }
+
+    updateGallery();
+}
+
+function nextGallery(){
+
+    currentGalleryIndex++;
+
+    if(currentGalleryIndex >= moments.length){
+        currentGalleryIndex = 0;
+    }
+
+    updateGallery();
+}
+
+function jumpGallery(index){
+
+    currentGalleryIndex = index;
+
+    updateGallery();
+}
+
+// ============================================
+// UPDATE GALERI
+// ============================================
+function updateGallery(){
+
+    const img =
+    document.getElementById("galleryMainImage");
+
+    if(img){
+        img.src = moments[currentGalleryIndex];
+    }
+
+    document.querySelectorAll(".gallery-thumb")
+    .forEach((thumb,i)=>{
+
+        thumb.classList.toggle(
+            "active",
+            i === currentGalleryIndex
+        );
+    });
+}
+
+// ============================================
+// KEYBOARD
+// ============================================
+function keyGallery(e){
+
+    if(e.key === "Escape"){
+        closeGalleryModal();
+    }
+
+    if(e.key === "ArrowLeft"){
+        prevGallery();
+    }
+
+    if(e.key === "ArrowRight"){
+        nextGallery();
+    }
+}
+
+// ============================================
+// INIT
+// ============================================
+document.addEventListener("DOMContentLoaded",()=>{
+
+    loadStudents();
+    loadMomenGrid();
+    loadSlider();
+});
